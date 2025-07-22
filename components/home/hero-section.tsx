@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import InlineTimer from "./countdown/inline-timer";
+// import InlineTimer from "./countdown/inline-timer";
 
 declare global {
   interface Window {
@@ -103,7 +103,7 @@ export default function HeroSection() {
 
   const handleVideoPlay = useCallback(async () => {
     setIsPlaying(true);
-    await initializeVideo();
+    await initializeVideo(); 
   }, [initializeVideo]);
 
   return (
