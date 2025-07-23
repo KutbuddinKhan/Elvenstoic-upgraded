@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Downsell2HeroSection from '@/components/downsell-2/Downsell-Herosection';
 import Downsell2ContentSection from '@/components/downsell-2/DownsellContentSection';
 import Downsell2GuaranteeSection from '@/components/downsell-2/DownsellGurantee';
+import Downsell2Popup from '@/components/downsell-2/DownsellPopup';
 
 const Downsell2Page = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -82,7 +83,7 @@ const Downsell2Page = () => {
                     <p className="text-sm mt-2 opacity-90">This page self-destructs when timer hits zero!</p>
                 </motion.div>
 
-                
+
 
                 {/* Guarantee Section */}
                 <Downsell2GuaranteeSection />
@@ -97,32 +98,53 @@ const Downsell2Page = () => {
                     <h3 className="text-3xl font-bold text-gray-900 mb-6">
                         Two Roads. Two Futures. One Decision.
                     </h3>
-                    
-                    <div className="space-y-4">
-                        <button
-                            onClick={handleAcceptFull}
-                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-xl px-8 py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-3"
-                        >
-                            ✅ YES - Give Me The System for €197!
-                            <span className="text-sm">(Save €94)</span>
-                        </button>
-                        
-                        <button
-                            onClick={handleAcceptPlan}
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg px-8 py-3 rounded-lg transition-colors duration-300"
-                        >
-                            💳 PAYMENT PLAN: 3x €97
-                            <span className="block text-sm opacity-90">Same access. Easier on your budget.</span>
-                        </button>
+
+                    <div className="space-y-6">
+                        {/* Full Payment Button */}
+                        <div>
+                            <button
+                                onClick={handleAcceptFull}
+                                className="bg-green-600 hover:bg-green-700 text-white font-bold text-xl px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3"
+                            >
+                                ✅ YES - Give Me The System for €197!
+                            </button>
+                            <p className="text-lg text-green-600 font-semibold mt-2">
+                                Finally. Let's turn your content into cash.
+                            </p>
+                        </div>
+
+                        {/* Payment Plan Button */}
+                        <div>
+                            <button
+                                onClick={handleAcceptPlan}
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg px-12 py-3 rounded-lg transition-colors duration-300 inline-flex items-center gap-3"
+                            >
+                                💳 PAYMENT PLAN: 3x €97
+                            </button>
+                            <p className="text-base text-blue-700 font-medium mt-2">
+                                Same access. Easier on your budget.
+                            </p>
+                        </div>
+
+                        {/* Scarcity + Decline */}
+                        <div className="flex items-center justify-center gap-2 text-sm text-orange-600 mt-6">
+                            <Clock className="w-4 h-4" />
+                            <span>This €197 price will NEVER exist again</span>
+                        </div>
 
                         <button
                             onClick={handleDecline}
-                            className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold px-8 py-2 rounded-lg transition-colors duration-300 text-sm"
+                            className="block mx-auto text-gray-500 hover:text-gray-700 underline text-sm transition-colors duration-300 mt-6"
                         >
                             ❌ No, I Choose to Stay Broke
                         </button>
+                        <p className="text-sm text-gray-400 mt-1">
+                            This is goodbye. There's no coming back.
+                        </p>
                     </div>
                 </motion.div>
+
+
 
                 {/* P.S. Section */}
                 <motion.div
@@ -148,7 +170,7 @@ const Downsell2Page = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
                     >
-                        {/* <Downsell2Popup
+                        <Downsell2Popup
                             isOpen={showPopup}
                             onClose={() => setShowPopup(false)}
                             onAcceptFull={() => {
@@ -160,7 +182,7 @@ const Downsell2Page = () => {
                             onDecline={() => {
                                 router.push('/thank-you-page');
                             }}
-                        /> */}
+                        />
                     </motion.div>
                 </div>
             )}
