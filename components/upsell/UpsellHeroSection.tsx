@@ -43,7 +43,7 @@ const UpsellHeroSection = () => {
                 <p className="text-green-200/90 text-sm md:text-base">
                     With Cinematic Studio, you now have everything you need to create content that looks like it came straight out of Hollywood.
                 </p>
-                <p className="text-base md:text-lg text-blue-100/80 mb-4">
+                <p className="text-green-200/90 text-sm md:text-base">
                     The tools. The transitions. The sounds. The complete branding blueprint.
                 </p>
             </motion.div>
@@ -73,12 +73,12 @@ const UpsellHeroSection = () => {
                     </h3>
                     <p className="text-base md:text-lg text-red-200/90 mb-4">99% of creators have amazing content.</p>
                     <p className="text-base md:text-lg text-red-200/90 mb-4">But only 1% know how to actually grow.</p>
-                    <p className="text-base md:text-lg text-red-200/90 mb-2 font-semibold">The difference?</p>
-                    <p className="text-xl md:text-2xl font-bold text-red-300">A system.</p>
+                    <p className="text-base md:text-lg font-bold text-red-200/90 mb-2">The difference?</p>
+                    <p className="text-xl md:text-2xl  text-red-300">A system.</p>
                     <p className="text-base md:text-lg text-red-200/90 mt-4">
                         Not luck. Not chance. Not "being at the right place at the right time."
                     </p>
-                    <p className="text-base md:text-lg font-semibold text-red-300">
+                    <p className="text-base md:text-lg text-red-200/90">
                         But a proven strategy that works over and over again.
                     </p>
                 </div>
@@ -97,7 +97,7 @@ const UpsellHeroSection = () => {
                 <div className="space-y-4 text-base md:text-lg text-blue-100/90">
                     <p>You wake up in the morning.</p>
                     <p className="font-semibold text-blue-200">+12,000 new followers overnight.</p>
-                    <p className="text-blue-200">Your last post? 18 million views.</p>
+                    <p className="text-blue-200">Your last post? <span className='font-bold'>18 million views</span>.</p>
 
                     <div className="relative w-full max-w-2xl h-[300px] md:h-[400px] mx-auto rounded-xl overflow-hidden mt-4 shadow-md bg-transparent">
                         <Image
@@ -114,7 +114,7 @@ const UpsellHeroSection = () => {
                     <p>Your account keeps growing every single day <span className='font-bold text-blue-200'>on autopilot.</span></p>
                     <p>Because you're not guessing anymore.</p>
                     <p>Because you know exactly what works.</p>
-                    <p>Because you have a system that works for you <span className='font-semibold text-blue-200'>even while you sleep.</span></p>
+                    <p>Because you have a system that works for you - <span className='font-semibold text-blue-200'>even while you sleep.</span></p>
                 </div>
             </motion.div>
 
@@ -137,15 +137,19 @@ const UpsellHeroSection = () => {
                         </div>
                         <div className="flex items-center gap-3">
                             <Users className="w-5 md:w-6 h-5 md:h-6 text-purple-400" />
-                            <span className="font-semibold text-purple-200">88,000+ New Followers (last 30 days alone)</span>
+                            <span className="font-semibold text-purple-200">
+                                88,000+ New Followers{' '}
+                                <span className="font-normal">(last 30 days alone)</span>
+                            </span>
                         </div>
+
                         <div className="flex items-center gap-3">
                             <Star className="w-5 md:w-6 h-5 md:h-6 text-purple-400" />
                             <span className="font-semibold text-purple-200">50+ Million Impressions every single month</span>
                         </div>
                         <div className="flex items-center gap-3">
                             <Check className="w-5 md:w-6 h-5 md:h-6 text-purple-400" />
-                            <span className="font-semibold text-purple-200">Over 98% Non-Follower Reach (the algorithm loves me) </span>
+                            <span className="text-purple-200">Over <span className='font-bold'>98% Non-Follower Reach</span> (the algorithm loves me) </span>
                         </div>
                     </div>
 
@@ -168,7 +172,7 @@ const UpsellHeroSection = () => {
                         <p className="text-base md:text-lg text-blue-100/80 mt-4">
                             No 24/7 hustle. No burnout. No desperate trending-audio posts.
                         </p>
-                        <p className="text-base md:text-lg font-semibold text-purple-300">
+                        <p className="text-base md:text-lg text-blue-100/80 ">
                             Just a system that runs like Swiss clockwork.
                         </p>
                     </div>

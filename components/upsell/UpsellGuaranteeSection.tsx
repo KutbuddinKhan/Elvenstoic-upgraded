@@ -19,14 +19,14 @@ const UpsellGuaranteeSection: React.FC = () => {
                 <p className="text-base md:text-lg text-blue-100/80 mb-4">
                     I'm so confident this system will transform your Instagram game forever that I'm making you this promise:
                 </p>
-                <p className="text-base md:text-lg text-blue-100/80 mb-4">
-                    If after 60 days you don't feel the VIP upgrade was worth every single penny – email me and you'll get your money back.
+                <p className="text-base md:text-lg font-semibold text-blue-100/80 mb-4">
+                    If after 60 days you don't feel the VIP upgrade was worth every single penny - email me and you'll get your money back.
                 </p>
-                <p className="text-base md:text-lg font-semibold text-blue-200 mb-2">
+                <p className="text-base md:text-lg text-blue-100/80 mb-2">
                     No questions. No drama. No fine print.
                 </p>
-                <p className="text-base md:text-lg font-semibold text-blue-300">
-                    Either it transforms your growth – or it costs you nothing.
+                <p className="text-base md:text-lg text-blue-100/80">
+                    Either it transforms your growth - or it costs you nothing.
                 </p>
             </motion.div>
 

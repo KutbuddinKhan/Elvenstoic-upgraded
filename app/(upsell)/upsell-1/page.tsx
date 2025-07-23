@@ -92,43 +92,44 @@ const Upsell1Page = () => {
                         </span>
                     </div>
                 </motion.div> */}
-                <motion.div
+
+                {/* <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 2.2 }}
                     className="text-center mb-12 px-4"
                 >
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
-                        YES! I Want the Complete System That Took me to <span className="underline text-yellow-300">1,000,000+ Followers</span>
+                        YES! I Want the Complete System That Took me to <span className="underline ">1,000,000+ Followers</span>
                     </h3>
 
-                    <p className="text-base md:text-lg text-blue-100/80 mb-6">
-                        Get a <span className="font-semibold">proven step-by-step blueprint</span>  to make your
-                        first €1,000 with Instagram in the next 14 days.
+                    <p className="text-base md:text-lg font-semibold text-blue-100/80 mb-6">
+                        Upgrade My Cinematic Studio to VIP for Just €197
                     </p>
 
-                    <div className="bg-white/5 border border-green-600 rounded-xl p-6 max-w-md mx-auto shadow-xl mb-6">
+                    <div className="bg-white/5 border border-green-600 rounded-xl p-6 max-w-xl mx-auto shadow-xl mb-6">
                         <p className="text-base md:text-lg text-white font-medium mb-2">
                             Regular Price <span className="line-through text-red-400">€497</span> &nbsp;-&nbsp;
-                            <span className="text-green-600 font-bold text-xl md:text-2xl">Today Only €197</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-700 font-bold text-xl md:text-2xl">
+                                Today Only €197
+                            </span>
                         </p>
+
 
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.98 }}
                             className="relative group mb-4 inline-block"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <div className="absolute mt-8 inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
                             <button
                                 onClick={handleAccept}
-                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
+                                className="relative mt-8 z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
                             >
                                 <Lock className="w-5 md:w-6 h-5 md:h-6" />
-                                Add to Cart — €197
+                                UPGRADE NOW FOR ONLY $197
                             </button>
                         </motion.div>
-
-                        {/* Payment Icons */}
                         <div className="flex justify-center mt-4">
                             <Image
                                 src="/upsell-1/cards.png"
@@ -139,6 +140,8 @@ const Upsell1Page = () => {
                             />
                         </div>
                     </div>
+
+                    
 
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-sm text-blue-100/70 mb-6">
                         <span className="flex items-center gap-2">
@@ -154,9 +157,73 @@ const Upsell1Page = () => {
                             Available Only on This Page
                         </span>
                     </div>
+                </motion.div> */}
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 2.2 }}
+                    className="text-center mb-12 px-4"
+                >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+                        YES! I Want the Complete System That Took me to <span className="underline">1,000,000+ Followers</span>
+                    </h3>
+
+                    <p className="text-base md:text-lg font-semibold text-blue-100/80 mb-6">
+                        Upgrade My Cinematic Studio to VIP for Just €197
+                    </p>
+
+                    {/* responsive price box */}
+                    <div className="bg-white/5 border-2 border-dashed border-green-600 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-6 w-full">
+                        <p className="text-base md:text-lg text-white font-medium mb-2">
+                            Regular Price <span className="line-through text-red-400">€497</span> &nbsp;-&nbsp;
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-700 font-bold text-xl md:text-2xl">
+                                Today Only €197
+                            </span>
+                        </p>
+
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative group mt-6 inline-block"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <button
+                                onClick={handleAccept}
+                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-base md:text-xl px-6 py-3 md:px-12 md:py-4 rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2 md:gap-3 border border-green-500/50 w-full sm:w-auto"
+                            >
+                                <Lock className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
+                                <span className="whitespace-nowrap">UPGRADE NOW FOR ONLY $197</span>
+                            </button>
+                        </motion.div>
+
+                        {/* Payment Icons */}
+                        <div className="flex justify-center mt-4">
+                            <Image
+                                src="/upsell-1/cards.png"
+                                alt="Payment Methods"
+                                width={220}
+                                height={30}
+                                className="h-auto w-full max-w-[240px]"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-blue-100/70 mb-6">
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            Instant Access
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            60-Day Money-Back Guarantee
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            Available Only on This Page
+                        </span>
+                    </div>
                 </motion.div>
-
-
 
                 {/* Guarantee Section Component */}
                 <UpsellGuaranteeSection />
@@ -169,11 +236,11 @@ const Upsell1Page = () => {
                     className="text-center mb-12 px-4"
                 >
                     <h3 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-                        Secure Your <span className="text-blue-300">Cinematic Studio VIP</span> Upgrade
+                        Secure Your Cinematic Studio VIP Upgrade
                     </h3>
 
                     <p className="text-lg md:text-xl text-blue-100 mb-4">
-                        The Proven System Behind Explosive Instagram Growth
+                       The Exact System for Explosive Instagram Growth
                     </p>
 
                     <p className="text-base md:text-lg text-blue-200 mb-6">

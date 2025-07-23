@@ -157,9 +157,9 @@ const UpsellContentSection = () => {
                     <p>To edit for hours only to get 100 views.</p>
                     <p>To watch other accounts explode while you're stuck.</p>
                 </div>
-                <p className="text-base md:text-lg text-blue-100/80 mb-4">I was exactly where you are now.</p>
-                <p className="text-base md:text-lg font-semibold text-white mb-4">The difference? I cracked the system.</p>
-                <p className="text-base md:text-lg font-semibold text-blue-300">And now I want you to have it too.</p>
+                <p className="text-base md:text-lg font-semibold text-blue-100/80 mb-4">I was exactly where you are now.</p>
+                <p className="text-base md:text-lg text-blue-100/80 mb-4">The difference? I cracked the system.</p>
+                <p className="text-base md:text-lg text-blue-100/80">And now I want you to have it too.</p>
             </motion.div>
 
             {/* Shortcut Section */}
@@ -194,15 +194,15 @@ const UpsellContentSection = () => {
                     IMPORTANT: This Is a ONE-TIME OFFER
                 </h3>
                 <div className="space-y-3 text-base md:text-lg text-red-200/90 mb-6">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center font-bold gap-3">
                         <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>This offer is NOT on my website</span>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center font-bold gap-3">
                         <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>You will NEVER see it again</span>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center font-bold gap-3">
                         <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>It's ONLY available here - because you've proven you're serious</span>
                     </div>
@@ -216,7 +216,7 @@ const UpsellContentSection = () => {
                     </p>
                     <p className="text-2xl md:text-3xl font-bold text-red-400 mb-4">Your price today? Only €197</p>
                     <p className="text-base md:text-lg font-semibold text-red-300">
-                        That's 60% OFF – exclusively for action takers like you.
+                        That's 60% OFF - exclusively for action takers like you.
                     </p>
                 </div>
             </motion.div>
