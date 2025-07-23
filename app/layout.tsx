@@ -1,13 +1,12 @@
+// File: F:\client-demos\Elvenstoic-upgraded\app\layout.tsx
+
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Poppins } from "next/font/google"
 import Script from "next/script"
 
 import "./globals.css"
-import Header from "@/components/layout/header"
-import Footer from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme-provider"
-import CookieConsent from "@/components/cookie-consent"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const poppins = Poppins({
@@ -31,22 +30,17 @@ export const metadata: Metadata = {
   },
   generator: "Strawhat devs",
   icons: {
-    icon: [
-      {
-        url: '/favicon.ico',
-        sizes: 'any',
-      },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -54,7 +48,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
       </head>
-      
+
       {/* ✅ Google Analytics Scripts */}
       <Script
         async
@@ -74,19 +68,12 @@ export default function RootLayout({
         }}
       />
 
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
+        suppressHydrationWarning
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          <div className="relative flex min-h-screen flex-col bg-background">
-            <Header />
-
-            <main className="flex-1">
-              {children}
-            </main>
-
-            <Footer />
-          </div>
-
-          <CookieConsent />
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import UpsellHeroSection from '@/components/upsell/UpsellHeroSection';
 import UpsellGuaranteeSection from '@/components/upsell/UpsellGuaranteeSection';
 import UpsellContentSection from '@/components/upsell/UpsellContentSection';
+import Image from 'next/image';
 
 const Upsell1Page = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -54,7 +55,7 @@ const Upsell1Page = () => {
                     className="text-center mb-12 px-4"
                 >
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-6">
-                        YES! I Want The Complete System That Took You to 1M+ Followers
+                        YES! I Want The Complete System That Took You to <span>1.000.000+ Followers</span>
                     </h3>
                     <p className="text-lg md:text-xl text-blue-100/80 mb-8">
                         Upgrade My Cinematic Studio to VIP for Just €197
@@ -77,6 +78,71 @@ const Upsell1Page = () => {
                     </motion.div>
 
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-sm text-blue-100/70 mb-8">
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            Instant Access
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            60-Day Money-Back Guarantee
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <Check className="w-4 h-4 text-green-400" />
+                            Only Available on This Page
+                        </span>
+                    </div>
+                </motion.div>
+
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 2.2 }}
+                    className="text-center mb-12 px-4"
+                >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+                        YES! I Want The Complete System That Took You to <span className="underline">1.000.000+ Followers</span>
+                    </h3>
+
+                    <p className="text-base md:text-lg text-blue-100/80 mb-6">
+                        And get a <span className="text-red-400 font-semibold">Proven Step-by-Step Blueprint</span> to make my
+                        first €1,000 with Instagram in the next 14 days.
+                    </p>
+
+                    <div className="bg-white/5 border border-green-600 rounded-xl p-6 max-w-md mx-auto shadow-xl mb-6">
+                        <p className="text-base md:text-lg text-white font-medium mb-2">
+                            Regular Price <span className="line-through text-red-400">€497</span> &nbsp;–&nbsp;
+                            <span className="text-yellow-300 font-bold text-xl md:text-2xl">Today Only €197</span>
+                        </p>
+
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative group mb-4 inline-block"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <button
+                                onClick={handleAccept}
+                                className="relative z-10 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 shadow-lg"
+                            >
+                                <Lock className="w-5 md:w-6 h-5 md:h-6" />
+                                Add To Cart — €197
+                            </button>
+                        </motion.div>
+
+                        {/* Payment Icons (Single Image) */}
+                        <div className="flex justify-center mt-4">
+                            <Image
+                                src="/upsell-1/cards.png"
+                                alt="Payment Methods"
+                                width={220}
+                                height={30}
+                                className="h-auto w-auto max-w-[240px]"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-sm text-blue-100/70 mb-6">
                         <span className="flex items-center gap-2">
                             <Check className="w-4 h-4 text-green-400" />
                             Instant Access

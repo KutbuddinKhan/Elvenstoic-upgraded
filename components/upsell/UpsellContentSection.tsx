@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Lock } from 'lucide-react';
+import { PinIcon } from 'lucide-react';
 
 const features = [
     {
@@ -79,7 +79,7 @@ const UpsellContentSection = () => {
                 className="mb-12"
             >
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
-                    What You Get Inside Cinematic Studio VIP:
+                    What You Get Inside Cinematic Studio Growth System:
                 </h3>
                 <div className="space-y-4 md:space-y-6">
                     {features.map((feature, index) => (
@@ -195,15 +195,15 @@ const UpsellContentSection = () => {
                 </h3>
                 <div className="space-y-3 text-base md:text-lg text-red-200/90 mb-6">
                     <div className="flex items-center gap-3">
-                        <Lock className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
+                        <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>This offer is NOT on my website</span>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Lock className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
+                        <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>You will NEVER see it again</span>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Lock className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
+                        <PinIcon className="w-4 md:w-5 h-4 md:h-5 flex-shrink-0" />
                         <span>It's ONLY available here - because you've proven you're serious</span>
                     </div>
                 </div>

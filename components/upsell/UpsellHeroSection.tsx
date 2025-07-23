@@ -43,6 +43,9 @@ const UpsellHeroSection = () => {
                 <p className="text-green-200/90 text-sm md:text-base">
                     With Cinematic Studio, you now have everything you need to create content that looks like it came straight out of Hollywood.
                 </p>
+                <p className="text-base md:text-lg text-blue-100/80 mb-4">
+                    The tools. The transitions. The sounds. The complete branding blueprint.
+                </p>
             </motion.div>
 
             {/* Problem Section */}
@@ -53,9 +56,7 @@ const UpsellHeroSection = () => {
                 className="mb-12"
             >
                 <div className="bg-slate-800/50 rounded-lg p-6 mb-8 backdrop-blur-sm border border-slate-700/50">
-                    <p className="text-base md:text-lg text-blue-100/80 mb-4">
-                        The tools. The transitions. The sounds. The complete branding blueprint.
-                    </p>
+
                     <p className="text-base md:text-lg text-blue-100/80 mb-4 font-semibold">
                         But let me ask you something...
                     </p>
@@ -96,7 +97,7 @@ const UpsellHeroSection = () => {
                 <div className="space-y-4 text-base md:text-lg text-blue-100/90">
                     <p>You wake up in the morning.</p>
                     <p className="font-semibold text-blue-200">+12,000 new followers overnight.</p>
-                    <p className="font-semibold text-blue-200">Your last post? 18 million views.</p>
+                    <p className="text-blue-200">Your last post? 18 million views.</p>
 
                     <div className="relative w-full max-w-2xl h-[300px] md:h-[400px] mx-auto rounded-xl overflow-hidden mt-4 shadow-md bg-transparent">
                         <Image
@@ -144,7 +145,7 @@ const UpsellHeroSection = () => {
                         </div>
                         <div className="flex items-center gap-3">
                             <Check className="w-5 md:w-6 h-5 md:h-6 text-purple-400" />
-                            <span className="font-semibold text-purple-200">Over 98% Non-Follower Reach</span>
+                            <span className="font-semibold text-purple-200">Over 98% Non-Follower Reach (the algorithm loves me) </span>
                         </div>
                     </div>
 
@@ -182,10 +183,10 @@ const UpsellHeroSection = () => {
                 className="text-center mb-12"
             >
                 <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">
-                    Introducing: Cinematic Studio VIP
+                    Introducing: Cinematic Studio Growth System
                 </h3>
                 <p className="text-lg md:text-xl text-blue-100/80 mb-6 font-bold">
-                    The Exact Growth System I Used to Go From 0 to 1 Million+ Followers
+                    The exact Methods I used to Go from 0 to 1.000.000 Followers
                 </p>
                 <div className="bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 border border-yellow-400/50 rounded-lg p-6 backdrop-blur-sm">
                     <p className="text-base md:text-lg font-semibold text-yellow-300 mb-2">
