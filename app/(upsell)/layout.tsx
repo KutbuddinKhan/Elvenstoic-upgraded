@@ -1,5 +1,3 @@
-// File: F:\client-demos\Elvenstoic-upgraded\app\(upsell)\layout.tsx
-
 import React from "react"
 
 export default function UpsellLayout({

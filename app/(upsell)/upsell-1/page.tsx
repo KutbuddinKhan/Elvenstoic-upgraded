@@ -48,7 +48,7 @@ const Upsell1Page = () => {
                 <UpsellContentSection />
 
                 {/* CTA Section */}
-                <motion.div
+                {/* <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 2.2 }}
@@ -91,9 +91,7 @@ const Upsell1Page = () => {
                             Only Available on This Page
                         </span>
                     </div>
-                </motion.div>
-
-
+                </motion.div> */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -101,18 +99,18 @@ const Upsell1Page = () => {
                     className="text-center mb-12 px-4"
                 >
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
-                        YES! I Want The Complete System That Took You to <span className="underline">1.000.000+ Followers</span>
+                        YES! I Want the Complete System That Took me to <span className="underline text-yellow-300">1,000,000+ Followers</span>
                     </h3>
 
                     <p className="text-base md:text-lg text-blue-100/80 mb-6">
-                        And get a <span className="text-red-400 font-semibold">Proven Step-by-Step Blueprint</span> to make my
+                        Get a <span className="font-semibold">proven step-by-step blueprint</span>  to make your
                         first €1,000 with Instagram in the next 14 days.
                     </p>
 
                     <div className="bg-white/5 border border-green-600 rounded-xl p-6 max-w-md mx-auto shadow-xl mb-6">
                         <p className="text-base md:text-lg text-white font-medium mb-2">
-                            Regular Price <span className="line-through text-red-400">€497</span> &nbsp;–&nbsp;
-                            <span className="text-yellow-300 font-bold text-xl md:text-2xl">Today Only €197</span>
+                            Regular Price <span className="line-through text-red-400">€497</span> &nbsp;-&nbsp;
+                            <span className="text-green-600 font-bold text-xl md:text-2xl">Today Only €197</span>
                         </p>
 
                         <motion.div
@@ -120,17 +118,17 @@ const Upsell1Page = () => {
                             whileTap={{ scale: 0.98 }}
                             className="relative group mb-4 inline-block"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
                             <button
                                 onClick={handleAccept}
-                                className="relative z-10 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 shadow-lg"
+                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
                             >
                                 <Lock className="w-5 md:w-6 h-5 md:h-6" />
-                                Add To Cart — €197
+                                Add to Cart — €197
                             </button>
                         </motion.div>
 
-                        {/* Payment Icons (Single Image) */}
+                        {/* Payment Icons */}
                         <div className="flex justify-center mt-4">
                             <Image
                                 src="/upsell-1/cards.png"
@@ -153,10 +151,11 @@ const Upsell1Page = () => {
                         </span>
                         <span className="flex items-center gap-2">
                             <Check className="w-4 h-4 text-green-400" />
-                            Only Available on This Page
+                            Available Only on This Page
                         </span>
                     </div>
                 </motion.div>
+
 
 
                 {/* Guarantee Section Component */}
