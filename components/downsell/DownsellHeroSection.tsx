@@ -24,82 +24,6 @@ const Downsell1HeroSection = () => {
                 </h3>
             </motion.div>
 
-             {/* Final CTA */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 2.2 }}
-                            className="text-center mb-12 px-4"
-                        >
-                            {/* <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-                                YES! I Want The Complete Growth System That Created 1,000,000+ Followers
-                            </h3> */}
-            
-            
-                            <p className="text-base md:text-lg font-semibold text-yellow-100 mb-6">
-                                Unlock Cinematic Studio Growth System for Just €197
-                            </p>
-            
-                            {/* responsive price box */}
-                            <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-6 w-full">
-                                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4 sm:mb-6">
-                                    <p className="text-sm sm:text-base md:text-lg text-white font-medium">
-                                        Regular Price{" "}
-                                        <span className="line-through text-red-400">€497</span>
-                                    </p>
-                                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-bold text-lg sm:text-xl md:text-2xl">
-                                        Today Only €197
-                                    </p>
-                                </div>
-            
-                                <motion.div
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="relative group w-full"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
-                                    <button
-                                        // onClick={handleAccept}
-                                        className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
-                                    >
-                                        <Lock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
-                                        <span className="whitespace-nowrap">
-                                            UPGRADE NOW FOR ONLY €197
-                                        </span>
-                                    </button>
-            
-                                </motion.div>
-            
-                                {/* Payment Icons */}
-                                <div className="flex justify-center mt-4 sm:mt-6">
-                                    <Image
-                                        src="/upsell-1/cards.png"
-                                        alt="Payment Methods"
-                                        width={220}
-                                        height={30}
-                                        className="h-auto w-full max-w-[240px]"
-                                        priority
-                                    />
-                                </div>
-                            </div>
-            
-                            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-yellow-100 mb-6">
-                                <span className="flex items-center gap-2">
-                                    <Check className="w-4 h-4 text-yellow-400" />
-                                    Instant Access
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <Check className="w-4 h-4 text-yellow-400" />
-                                    60-Day Money-Back Guarantee
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <Check className="w-4 h-4 text-yellow-400" />
-                                    Available Only on This Page
-                                </span>
-                            </div>
-                        </motion.div>
-
-
             {/* Honesty Section */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -154,6 +78,76 @@ const Downsell1HeroSection = () => {
                     <p className="text-lg md:text-xl font-bold text-orange-300 mt-6">
                         And I don't want that to happen to you.
                     </p>
+                </div>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 2.2 }}
+                className="text-center mb-12 px-4"
+            >
+                <p className="text-base md:text-lg font-semibold text-yellow-100 mb-6">
+                    Unlock Cinematic Studio Growth System for Just €97
+                </p>
+
+                {/* responsive price box */}
+                <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-6 w-full">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4 sm:mb-6">
+                        <p className="text-sm sm:text-base md:text-lg text-white font-medium">
+                            Regular Price{" "}
+                            <span className="line-through text-red-400">€497</span>
+                        </p>
+                        <p className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-bold text-lg sm:text-xl md:text-2xl">
+                            Today Only €97
+                        </p>
+                    </div>
+
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="relative group w-full"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                        <button
+                            // onClick={handleAccept}
+                            className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+                        >
+                            <Lock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+                            <span className="whitespace-nowrap">
+                                UPGRADE NOW FOR ONLY €97
+                            </span>
+                        </button>
+
+                    </motion.div>
+
+                    {/* Payment Icons */}
+                    <div className="flex justify-center mt-4 sm:mt-6">
+                        <Image
+                            src="/upsell-1/cards.png"
+                            alt="Payment Methods"
+                            width={220}
+                            height={30}
+                            className="h-auto w-full max-w-[240px]"
+                            priority
+                        />
+                    </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-yellow-100 mb-6">
+                    <span className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-yellow-400" />
+                        Instant Access
+                    </span>
+                    <span className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-yellow-400" />
+                        60-Day Money-Back Guarantee
+                    </span>
+                    <span className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-yellow-400" />
+                        Available Only on This Page
+                    </span>
                 </div>
             </motion.div>
 
