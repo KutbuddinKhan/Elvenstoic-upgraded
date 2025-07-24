@@ -142,17 +142,16 @@ const Downsell1ContentSection = () => {
                     <p className="font-semibold text-yellow-300">Give me 30 days.</p>
                     <p>Follow the system. Apply the strategies. Do the work.</p>
                     <p>
-                        If you don't see <strong className="text-yellow-300">SIGNIFICANT growth</strong>...<br />
+                        If you don't see SIGNIFICANT growth...<br />
                         If you don't feel like this was the best €97 you ever spent...
                     </p>
-                    <div className="bg-yellow-800/30 border border-yellow-600/50 rounded-lg p-4 md:p-6 mt-4 md:mt-6">
-                        <p className="text-yellow-200 font-semibold text-lg md:text-xl text-center">
-                            I'll refund every single cent.
+                     <p className="text-yellow-300 font-bold text-xl md:text-2xl text-center">
+                           I'll refund every single cent.
                         </p>
-                        <p className="text-yellow-300 font-bold text-xl md:text-2xl text-center mt-2">
+                        <p className="text-yellow-200 text-lg md:text-xl text-center">
                             You literally have nothing to lose.
                         </p>
-                    </div>
+                       
                 </div>
             </motion.div>
         </>

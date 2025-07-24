@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, AlertTriangle } from 'lucide-react';
 
@@ -17,15 +17,53 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
   onAccept,
   onDecline,
 }) => {
+  // Handle ESC key press
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscKey);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
+  // Handle backdrop click (click outside modal)
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  // Handle close button click with event stop propagation
+  const handleCloseClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      onClick={handleBackdropClick}
+    >
       <motion.div
         initial={{ opacity: 0, y: -30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 30, scale: 0.95 }}
         className="relative bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700/50 rounded-xl shadow-2xl p-4 md:p-6 w-full max-w-4xl max-h-[95vh] overflow-y-auto backdrop-blur-sm"
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
       >
         {/* Background Elements */}
         <div className="absolute inset-0 bg-grid opacity-5 rounded-xl"></div>
@@ -36,8 +74,9 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
 
         {/* Close Button */}
         <button
-          onClick={onClose}
-          className="absolute top-3 right-3 md:top-4 md:right-4 text-slate-400 hover:text-slate-200 transition-colors z-10 p-1"
+          onClick={handleCloseClick}
+          className="absolute top-3 right-3 md:top-4 md:right-4 text-slate-400 hover:text-slate-200 transition-colors z-20 p-1 bg-slate-800/50 rounded-full hover:bg-slate-700/50"
+          aria-label="Close popup"
         >
           <X className="w-5 h-5 md:w-6 md:h-6" />
         </button>
@@ -52,7 +91,7 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
               </h1>
             </div>
             <h2 className="text-lg md:text-2xl font-bold text-white mb-2 leading-tight">
-              You're About to Walk Away From My ENTIRE 1M Follower System...
+              You're About to Walk Away From My ENTIRE 1.000.000+ Follower System...
             </h2>
             <h3 className="text-base md:text-xl font-bold text-red-400">
               For Less Than What You'd Spend on a Pair of Shoes?!
@@ -66,20 +105,20 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
             </h3>
             <div className="space-y-3 md:space-y-4 text-yellow-200/90 text-sm md:text-base">
               <p>
-                I just offered you <strong className="text-yellow-300">€1,782 worth of growth strategies for €97.</strong>
+                I just offered you <strong className="font-bold">€1,782 worth of growth strategies for €97.</strong>
               </p>
               <p>
-                That's not a typo. That's <strong className="text-yellow-300">NINETY-SEVEN EUROS.</strong>
+                That's not a typo. That's <strong className="font-bold">NINETY-SEVEN EUROS.</strong>
               </p>
               <div>
-                <p className="mb-2">That's literally:</p>
+                <p className="mb-2 font-semibold">That's literally:</p>
                 <ul className="list-disc ml-4 md:ml-6 space-y-1 text-sm md:text-base">
                   <li>Less than a night out</li>
                   <li>Less than a tank of gas</li>
                   <li>Less than your monthly Netflix + Spotify</li>
                 </ul>
               </div>
-              <p className="font-semibold text-yellow-300">
+              <p className="">
                 But unlike those things, <strong>this actually PAYS YOU BACK.</strong>
               </p>
             </div>
@@ -144,36 +183,61 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
                 If you can't bet €97 on yourself...<br />
                 Maybe you're not as serious about success as you thought.
               </p>
-              <p className="font-semibold text-purple-300">
-                Because every successful creator I know?<br />
-                <strong>They would have KILLED for this opportunity at this price.</strong>
+              <p className=" text-purple-300">
+                <strong>Because every successful creator I know?</strong><br />
+                They would have KILLED for this opportunity at this price.
               </p>
             </div>
           </div>
 
           {/* Final Choices */}
-          <div className="text-center space-y-4">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={onAccept}
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-0 group-hover:opacity-75 transition duration-200 -z-10" />
-              💚 YES! I'M NOT CRAZY - GIVE ME THE SYSTEM FOR €97
-            </motion.button>
-            
-            <button
-              onClick={onDecline}
-              className="bg-slate-700/50 hover:bg-slate-600/50 text-slate-300 hover:text-slate-200 text-sm md:text-base font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg transition duration-300 border border-slate-600/50 w-full"
-            >
-              ❌ No, I Want to Stay Small
-            </button>
-            
-            <p className="text-xs md:text-sm text-slate-400 italic mt-3 px-2">
-              This pop-up will close in a couple seconds and never appear again. Choose wisely.
-            </p>
-          </div>
+          {/* Final Call to Action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center mt-10 px-4"
+          >
+            <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight mb-6">
+              Final Time - Your Two Choices
+            </h2>
+
+            {/* Final Choices */}
+            <div className="space-y-4">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onAccept();
+                }}
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-0 group-hover:opacity-75 transition duration-200 -z-10" />
+                💚 YES! I'M NOT CRAZY - GIVE ME THE SYSTEM FOR €97
+              </motion.button>
+
+              <p className="text-sm text-green-300 italic">Thank god. You scared me for a second there.</p>
+
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onDecline();
+                }}
+                className="bg-slate-700/50 hover:bg-slate-600/50 text-slate-300 hover:text-slate-200 text-sm md:text-base font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg transition duration-300 border border-slate-600/50 w-full"
+              >
+                ❌ No, I Want to Stay Small
+              </button>
+
+              <p className="text-sm text-slate-400 italic">I hope you don't regret this decision for the rest of your life.</p>
+
+              <p className="text-xs md:text-sm text-slate-500 italic mt-3 px-2">
+                This pop-up will close in a couple seconds and never appear again. Choose wisely.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </div>

@@ -13,12 +13,26 @@ const Downsell1Page = () => {
     const router = useRouter();
 
     const handleDecline = () => {
-        setShowPopup(true);
+        setShowPopup(true); 
     };
 
     const handleAccept = () => {
         // Handle upgrade to VIP at downsell price - redirect to CopeCart or next step
         window.location.href = '/upsell-2'; // Or CopeCart downsell URL
+    };
+
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    };
+
+    const handlePopupAccept = () => {
+        setShowPopup(false);
+        window.location.href = '/upsell-2'; // Or CopeCart downsell URL
+    };
+
+    const handlePopupDecline = () => {
+        setShowPopup(false);
+        router.push('/thank-you'); // Or wherever declined users should go
     };
 
     return (
@@ -78,10 +92,10 @@ const Downsell1Page = () => {
                             Smart move. Let's build your empire together.
                         </p>
 
-                        <div className="flex items-center justify-center gap-2 text-sm text-orange-400 mt-6">
+                        {/* <div className="flex items-center justify-center gap-2 text-sm text-orange-400 mt-6">
                             <Clock className="w-4 h-4" />
                             <span>This €97 price will NEVER exist again</span>
-                        </div>
+                        </div> */}
 
                         <button
                             onClick={handleDecline}
@@ -89,6 +103,11 @@ const Downsell1Page = () => {
                         >
                             ❌ No Thanks - I'll Pass on This Final Offer
                         </button>
+
+                        <div className="flex items-center justify-center gap-2 text-sm text-red-400 mt-6">
+                            <span>I understand. But remember - this chance won't come again.
+</span>
+                        </div>
                     </div>
                 </motion.div>
 
@@ -112,25 +131,12 @@ const Downsell1Page = () => {
 
             {/* Popup Modal */}
             {showPopup && (
-                <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center overflow-x-hidden overflow-y-auto px-4 sm:px-6">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full max-w-3xl mx-auto"
-                    >
-                        <Downsell1Popup
-                            isOpen={showPopup}
-                            onClose={() => setShowPopup(false)}
-                            onAccept={() => {
-                                window.location.href = '/upsell-2'; // Or CopeCart downsell URL
-                            }}
-                            onDecline={() => {
-                                router.push('/thank-you'); // Or wherever declined users should go
-                            }}
-                        />
-                    </motion.div>
-                </div>
+                <Downsell1Popup
+                    isOpen={showPopup}
+                    onClose={handleClosePopup}
+                    onAccept={handlePopupAccept}
+                    onDecline={handlePopupDecline}
+                />
             )}
         </div>
     );

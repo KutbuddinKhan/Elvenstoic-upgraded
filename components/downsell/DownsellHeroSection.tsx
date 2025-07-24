@@ -8,24 +8,21 @@ const Downsell1HeroSection = () => {
     return (
         <>
             {/* Main Header */}
+
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="text-center mb-12"
             >
-                <div className="bg-gradient-to-r from-red-900/40 to-red-800/40 border-2 border-red-600/50 rounded-lg p-4 md:p-6 mb-6 backdrop-blur-sm">
-                    <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-red-300 mb-4 leading-tight">
-                        WAIT! I Totally Get It...
-                    </h1>
-                    <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-red-400 mb-4">
-                        €197 Feels Like a Big Investment Right Now.
-                    </h2>
-                    <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-red-500">
-                        But What If You Could Get EVERYTHING for Less Than Half?
-                    </h3>
-                </div>
+                <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold mt-6 text-white">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">€197</span> Feels Like a Big Investment Right Now.
+                </h2>
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold mt-4 text-white">
+                    But What If You Could Get <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">EVERYTHING for Less Than Half?</span>
+                </h3>
             </motion.div>
+
 
             {/* Honesty Section */}
             <motion.div
@@ -38,13 +35,13 @@ const Downsell1HeroSection = () => {
                     Look, I'm going to be completely honest with you.
                 </h3>
                 <div className="space-y-4 text-base md:text-lg text-blue-100/80">
-                    <p className="font-semibold text-red-400">I NEVER do this.</p>
+                    <p className="font-semibold">I NEVER do this.</p>
                     <p>But I can see you're serious about growing your Instagram...</p>
                     <p>You invested in Cinematic Studio. You made it this far. You clearly want more.</p>
                 </div>
 
                 <div className="bg-gradient-to-r from-blue-900/40 to-blue-800/40 border border-blue-600/50 rounded-lg p-4 md:p-6 mt-6 backdrop-blur-sm">
-                    <h4 className="text-xl md:text-2xl font-bold text-blue-300 mb-4">
+                    <h4 className="text-xl md:text-2xl font-bold text-blue-200 mb-4">
                         So here's what I'm going to do:
                     </h4>
                     <div className="text-center">
@@ -57,7 +54,7 @@ const Downsell1HeroSection = () => {
                         <p className="text-base md:text-lg text-blue-100/80">
                             This is the EXACT same system. Nothing removed. Nothing held back.
                         </p>
-                        <p className="text-base md:text-lg font-semibold text-blue-300 mt-2">
+                        <p className="text-base md:text-lg text-blue-100/80 mt-2">
                             The same blueprint that took me from 0 to 1,000,000+ followers.
                         </p>
                     </div>
@@ -162,11 +159,6 @@ const Downsell1HeroSection = () => {
                             <p className="text-base md:text-lg font-bold text-green-300">Which story do you want to live?</p>
                         </div>
                     </div>
-                </div>
-                <div className="text-center mt-6 md:mt-8">
-                    <p className="text-lg md:text-xl font-bold text-white">
-                        Two futures. One choice. Which one do you want?
-                    </p>
                 </div>
             </motion.div>
         </>
