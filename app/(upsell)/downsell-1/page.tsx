@@ -92,11 +92,6 @@ const Downsell1Page = () => {
                             Smart move. Let's build your empire together.
                         </p>
 
-                        {/* <div className="flex items-center justify-center gap-2 text-sm text-orange-400 mt-6">
-                            <Clock className="w-4 h-4" />
-                            <span>This €97 price will NEVER exist again</span>
-                        </div> */}
-
                         <button
                             onClick={handleDecline}
                             className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300 mt-6"

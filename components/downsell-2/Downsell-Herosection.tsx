@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, Heart, TrendingUp } from 'lucide-react';
+import { Check, DollarSign, Heart, Lock, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
 
 const Downsell2HeroSection = () => {
     return (
@@ -21,6 +22,9 @@ const Downsell2HeroSection = () => {
                     But What If You Could Get EVERYTHING for €197?
                 </h2>
             </motion.div>
+
+           
+
 
             {/* Breaking Rules Section */}
             <motion.div

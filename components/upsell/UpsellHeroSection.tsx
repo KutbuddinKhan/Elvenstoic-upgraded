@@ -17,7 +17,7 @@ const UpsellHeroSection = () => {
             >
                 <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                     Unlock the Secret System That Took Me From{' '}
-                    <span className="text-red-400 bg-clip-text bg-gradient-to-r from-red-400 via-red-300 to-red-400 drop-shadow-[0_2px_2px_rgba(255,100,100,0.3)]">0 to 1 Million Followers</span>
+                    <span className="text-red-400 bg-clip-text bg-gradient-to-r from-red-400 via-red-300 to-red-400 drop-shadow-[0_2px_2px_rgba(255,100,100,0.3)]">0 to 1.000.000+ Followers</span>
                     {' '}And Build a Profitable Instagram Brand That ACTUALLY Grows.
                 </h1>
                 <div className="bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-lg backdrop-blur-sm">
