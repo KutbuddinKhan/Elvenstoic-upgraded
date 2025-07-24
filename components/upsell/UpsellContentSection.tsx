@@ -191,7 +191,7 @@ const UpsellContentSection = () => {
                 className="bg-gradient-to-r from-red-900/40 to-red-800/40 border border-red-600/50 rounded-lg p-6 md:p-8 mb-12 backdrop-blur-sm"
             >
                 <h3 className="text-2xl md:text-3xl font-bold text-red-300 mb-6">
-                    IMPORTANT: This Is a ONE-TIME OFFER
+                    IMPORTANT: This Is a ONE-TIME OFFER 
                 </h3>
                 <div className="space-y-3 text-base md:text-lg text-red-200/90 mb-6">
                     <div className="flex items-center font-bold gap-3">

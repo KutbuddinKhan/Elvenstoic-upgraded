@@ -190,7 +190,6 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
             </div>
           </div>
 
-          {/* Final Choices */}
           {/* Final Call to Action */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -3,64 +3,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import Carousel from "./Carousel";
-import ImageCarousel from "./Carousel";
 import Image from "next/image";
-
-interface ImageData {
-  id: string;
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-}
-
-const modules = [
-  {
-    number: 1,
-    title: "The €8K Product Launch System",
-    icon: "🚀",
-    description: "See exactly how I made €8,000 in 72 hours from ONE launch.",
-    features: [
-      "My complete launch timeline & Strategy (10 days before to 3 days after)",
-      "Every single Story, Post, and Reel I used (with my templates)",
-      "The psychological triggers that made people BUY",
-      "My DM Automation scripts that converted browsers into buyers",
-      "The pricing strategy that maximized revenue",
-    ],
-    result: "This module alone has made me over €30,000 this year.",
-    image: "/upsell-2/module-1.jpg",
-  },
-  // ... rest of the modules array
-];
-
-const bonuses = [
-  {
-    title: "Complete Swipe File",
-    icon: "📱",
-    description: "Every email, DM, and promo post that's made me money",
-  },
-  {
-    title: "Live Launch Breakdown",
-    icon: "🎬",
-    description:
-      "Watch me plan and execute a 2 Days €4K Promo Launch in real-time",
-  },
-];
-
-const targetAudience = [
-  { text: "You have an audience (or are building one)", isFor: true },
-  { text: 'You\'re tired of creating content for "exposure"', isFor: true },
-  { text: "You want a REAL business, not just likes", isFor: true },
-  { text: "You're ready to join the 1% who actually make money", isFor: true },
-  { text: 'This is NOT for people who want "get rich quick"', isFor: false },
-  { text: "This is NOT for people afraid of selling", isFor: false },
-  { text: "This is NOT for people who won't implement", isFor: false },
-];
-
-const galleryImages: ImageData[] = [
-  // ... gallery images array
-];
+import { bonuses, modules, targetAudience } from "@/data/upsell-data/upsell-2";
+import ImageCarousel from "./Carousel";
 
 const UpsellTwoContentSection = () => {
   return (
@@ -152,7 +97,7 @@ const UpsellTwoContentSection = () => {
         className="bg-slate-800/30 rounded-lg p-8 mb-12 border border-slate-700"
       >
         <h3 className="text-2xl font-bold text-white mb-6 text-center">
-          This Is NOT Part of Cinematic Studio or VIP
+          This Is NOT Part of The Cinematic Studio Growth System
         </h3>
         <p className="text-lg text-gray-300 mb-4 text-center font-semibold">
           Let me be crystal clear:
@@ -216,7 +161,8 @@ const UpsellTwoContentSection = () => {
             ))}
           </div>
 
-          <ImageCarousel images={galleryImages} />
+         
+
           <p className="text-sm text-gray-400 mt-2">
             Click any image above to view it in full screen and browse through
             all the materials
@@ -231,7 +177,7 @@ const UpsellTwoContentSection = () => {
         transition={{ duration: 0.6, delay: 2.6 }}
         className="mb-12"
       >
-        {/* Image Carousel Component */}
+         <ImageCarousel  />
       </motion.div>
     </>
   );

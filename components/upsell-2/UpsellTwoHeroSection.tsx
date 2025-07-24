@@ -23,12 +23,12 @@ const Upsell2HeroSection = () => {
           Turn Your Instagram Following Into a Real Business That Pays You Every
           Single Month
         </p>
-        <div className="bg-amber-900/20 border-l-4 border-amber-500 p-4 mb-6">
+        {/* <div className="bg-amber-900/20 border-l-4 border-amber-500 p-4 mb-6">
           <p className="text-lg font-semibold text-amber-200">
-            This is NOT part of Cinematic Studio or VIP - This is the
+            This is NOT part of Cinematic Studio Growth System - This is the
             MONETIZATION layer.
           </p>
-        </div>
+        </div> */}
       </motion.div>
 
       {/* Reality Check Section */}
@@ -36,12 +36,12 @@ const Upsell2HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="bg-red-900/20 border border-red-700/50 rounded-lg p-6 mb-8"
+        className="bg-gradient-to-r from-red-900/40 to-red-800/40 border border-red-600/50 p-6 mb-8"
       >
         <h2 className="text-2xl font-bold text-red-300 mb-4">
           Real talk for a second... 🚨
         </h2>
-        <div className="space-y-3 text-red-200">
+        <div className="space-y-3 text-red-200/90">
           <p>
             How many creators do you know with 50K, 100K, even 500K followers...
           </p>
@@ -50,11 +50,11 @@ const Upsell2HeroSection = () => {
             They post every day. They get millions of views. Their content is
             fire.
           </p>
-          <p className="font-semibold text-xl text-white">
+          <p className="font-semibold text-xl text-red-300">
             But their bank account? Empty.
           </p>
         </div>
-        <div className="mt-6 bg-slate-800/50 rounded-lg p-4">
+          <div className="mt-6 bg-slate-800/50 rounded-lg p-4">
           <p className="text-red-200 font-semibold">
             Meanwhile, I'm sitting here with a faceless brand, making over
             €30,000 in the last 90 days from multiple different income streams.
@@ -107,13 +107,13 @@ const Upsell2HeroSection = () => {
             </div>
           </div>
           <div className="mt-6 bg-slate-800/50 rounded-lg p-6">
-            <p className="text-xl font-bold text-white mb-2">
+            <p className=" text-white mb-2">
               Turning those followers into customers. Systems. Revenue streams.
               A business that runs while you sleep.
             </p>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg font-semibold text-gray-300">
               That's what separates hobbyists from{" "}
-              <strong className="text-white">CEOs</strong>.
+              <strong className="text-white font-bold">CEOs</strong>.
             </p>
           </div>
         </div>
@@ -168,12 +168,12 @@ const Upsell2HeroSection = () => {
           <p className="text-lg text-green-300 mb-2">
             All from Instagram. All without showing my face. All systematic.
           </p>
-          <p className="text-xl font-bold text-green-200 mb-2">
+          <p className="text-lg text-green-300 mb-2">
             This isn't luck. This isn't a one-time thing.
           </p>
           <p className="text-lg font-semibold text-green-300">
             This is what happens when you have{" "}
-            <strong className="text-white">THE SYSTEM</strong> .
+            <strong className="text-xl">THE SYSTEM</strong> .
           </p>
         </div>
       </motion.div>
@@ -186,20 +186,20 @@ const Upsell2HeroSection = () => {
         className="text-center mb-12"
       >
         <h3 className="text-4xl font-bold text-white mb-4">
-          Introducing: Studio Pro - The Monetization Engine
+          Introducing: Cinematic Studio Beginner Friendly Monetization System
         </h3>
         <p className="text-xl text-gray-300 mb-6 font-bold">
           The Complete Business System Behind My €10K/Month Creator Brand
         </p>
         <div className="bg-amber-900/20 border border-amber-700/50 rounded-lg p-6">
-          <p className="text-lg font-semibold text-amber-200 mb-2">
+          <p className="text-lg  text-amber-200 mb-2">
             This isn't another "make money online" course.
           </p>
           <p className="text-lg text-amber-200">
             This is the EXACT playbook I use. Every day. To turn content into
             cash.
           </p>
-          <p className="text-lg font-semibold text-amber-200 mt-2">
+          <p className="text-xl font-semibold text-amber-200 mt-2">
             No theory. No fluff. Just pure, proven systems.
           </p>
         </div>

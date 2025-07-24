@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Clock, Lock, TrendingUp } from "lucide-react";
+import { Check, Clock, Lock, RocketIcon, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Upsell2HeroSection from "@/components/upsell-2/UpsellTwoHeroSection";
 import UpsellTwoContentSection from "@/components/upsell-2/UpsellTwoContentSection";
@@ -57,24 +57,19 @@ const Upsell2Page = () => {
           transition={{ duration: 0.6, delay: 2.2 }}
           className="text-center mb-12 px-4"
         >
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
             YES! Turn My Following Into a{" "}
             <span className="underline">€10K/Month Business</span>
           </h3>
 
           <p className="text-base md:text-lg font-semibold text-blue-100/80 mb-6">
-            Get Studio Pro - The Monetization Engine
+            Get The Cinematic Studio Beginner Friendly Monetization System
           </p>
 
           {/* Price Box */}
-          <div className="bg-white/5 border-2 border-dashed border-green-600 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-6 w-full">
-            <p className="text-base md:text-lg text-white font-medium mb-2">
-              Regular Price{" "}
-              <span className="line-through text-red-400">€597</span>{" "}
-              &nbsp;-&nbsp;
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-green-700 font-bold text-xl md:text-2xl">
-                Today Only €297
-              </span>
+          <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-6 w-full">
+            <p className="text-base md:text-lg text-yellow-400 font-medium mb-2">
+              One-Time Investment: €297
             </p>
 
             <motion.div
@@ -82,14 +77,14 @@ const Upsell2Page = () => {
               whileTap={{ scale: 0.98 }}
               className="relative group mt-6 inline-block"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
               <button
                 onClick={handleAccept}
-                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-base md:text-xl px-6 py-3 md:px-12 md:py-4 rounded-lg transition-colors duration-300 inline-flex items-center justify-center gap-2 md:gap-3 border border-green-500/50 w-full sm:w-auto"
+                className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
               >
-                <TrendingUp className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
+                <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
                 <span className="whitespace-nowrap">
-                  UNLOCK MONETIZATION ENGINE
+                  UNLOCK THE MONETIZATION ENGINE NOW
                 </span>
               </button>
             </motion.div>
@@ -108,15 +103,15 @@ const Upsell2Page = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-blue-100/70 mb-6">
             <span className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-400" />
+              <Check className="w-4 h-4 text-yellow-400" />
               Instant Access
             </span>
             <span className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-400" />
+              <Check className="w-4 h-4 text-yellow-400" />
               Lifetime Updates
             </span>
             <span className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-green-400" />
+              <Check className="w-4 h-4 text-yellow-400" />
               60-Day Guarantee
             </span>
           </div>
@@ -129,7 +124,7 @@ const Upsell2Page = () => {
 
             <button
               onClick={handleDecline}
-              className="block mx-auto text-gray-400 hover:text-gray-300 underline text-sm transition-colors duration-300"
+              className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300"
             >
               No thanks, I'll keep creating for free
             </button>
@@ -137,7 +132,7 @@ const Upsell2Page = () => {
 
           {/* P.S. Section */}
           <div className="mt-8 bg-amber-900/10 border border-amber-800/30 rounded-lg p-6">
-            <p className="text-sm font-semibold text-amber-200 mb-2">
+            <p className="text-sm text-amber-200 mb-2">
               P.S. - In the time it took you to read this page, I probably made
               another €50 from automated systems. That's the power of having a
               real monetization engine. The question is: When will you build
