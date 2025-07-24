@@ -38,7 +38,7 @@ export const modules = [
       "My actual email templates (just swap your info)",
     ],
     result: "Currently generating €2-3K per month on autopilot.",
-    image: "/upsell-2/module-2.jpg",
+    image: "/upsell-2/module-2.png",
   },
   {
     number: 3,

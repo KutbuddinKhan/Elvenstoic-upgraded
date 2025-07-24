@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
 import Image from "next/image";
 
-// Sample image data - replace with your actual images
 const carouselImages = [
   {
     id: 1,
@@ -57,348 +56,314 @@ const carouselImages = [
   },
 ];
 
-interface ImageCarouselProps {
-  images?: typeof carouselImages;
-}
-
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ 
-  images = carouselImages 
-}) => {
+const ImageCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [showFullscreen, setShowFullscreen] = useState(false);
   const [fullscreenIndex, setFullscreenIndex] = useState(0);
-  const [visibleImages, setVisibleImages] = useState(3);
-  const [isMounted, setIsMounted] = useState(false);
-
-  // Handle mounting
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Responsive breakpoints
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setVisibleImages(1);
-      } else if (width < 1024) {
-        setVisibleImages(2);
-      } else if (width < 1280) {
-        setVisibleImages(3);
-      } else {
-        setVisibleImages(4);
-      }
-    };
-
-    if (isMounted) {
-      handleResize();
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, [isMounted]);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-slide functionality
-  useEffect(() => {
-    if (!isFullscreen && images.length > visibleImages && isMounted) {
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => {
-          const maxIndex = images.length - visibleImages;
-          return prev >= maxIndex ? 0 : prev + 1;
-        });
-      }, 5000);
-      return () => clearInterval(interval);
+  const startAutoSlide = useCallback(() => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 4000); // 4 seconds interval
+  }, []);
+
+  const stopAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
-  }, [images.length, visibleImages, isFullscreen, isMounted]);
-
-  const maxIndex = Math.max(0, images.length - visibleImages);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => prev >= maxIndex ? 0 : prev + 1);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => prev <= 0 ? maxIndex : prev - 1);
+  useEffect(() => {
+    if (isPlaying && !showFullscreen) {
+      startAutoSlide();
+    } else {
+      stopAutoSlide();
+    }
+
+    return () => stopAutoSlide();
+  }, [isPlaying, showFullscreen, startAutoSlide]);
+
+  // Navigation functions
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
+  const goToPrev = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? carouselImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  // Touch handlers
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrev();
+    }
+  };
+
+  // Fullscreen handlers
   const openFullscreen = (index: number) => {
     setFullscreenIndex(index);
-    setIsFullscreen(true);
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'hidden';
-    }
+    setShowFullscreen(true);
+    setIsPlaying(false);
   };
 
   const closeFullscreen = () => {
-    setIsFullscreen(false);
-    if (typeof document !== 'undefined') {
-      document.body.style.overflow = 'unset';
-    }
+    setShowFullscreen(false);
+    setIsPlaying(true);
   };
 
-  const nextFullscreenImage = () => {
-    setFullscreenIndex((prev) => (prev + 1) % images.length);
+  const nextFullscreen = () => {
+    setFullscreenIndex((prevIndex) => 
+      prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
-  const prevFullscreenImage = () => {
-    setFullscreenIndex((prev) => prev === 0 ? images.length - 1 : prev - 1);
+  const prevFullscreen = () => {
+    setFullscreenIndex((prevIndex) => 
+      prevIndex === 0 ? carouselImages.length - 1 : prevIndex - 1
+    );
   };
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (isFullscreen) {
-        if (e.key === 'ArrowLeft') prevFullscreenImage();
-        if (e.key === 'ArrowRight') nextFullscreenImage();
-        if (e.key === 'Escape') closeFullscreen();
-      }
-    };
-
-    if (isMounted) {
-      document.addEventListener('keydown', handleKeyPress);
-      return () => document.removeEventListener('keydown', handleKeyPress);
-    }
-  }, [isFullscreen, isMounted]);
-
-  if (images.length === 0 || !isMounted) return null;
 
   return (
     <>
       {/* Main Carousel */}
-      <div className="relative w-full mt-8 px-2 sm:px-4">
-        {/* Carousel Title */}
-        <h4 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 text-center px-2">
-          📸 Studio Pro Materials Preview
-        </h4>
-        
-        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-slate-800/30 p-2 sm:p-4">
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex gap-2 sm:gap-4"
-              animate={{
-                x: `-${currentIndex * (100 / visibleImages)}%`
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30
-              }}
-              style={{
-                width: `${(images.length / visibleImages) * 100}%`
-              }}
+      <div className="relative w-full  rounded-lg overflow-hidden">
+        {/* Carousel Header */}
+        <div className="bg-slate-900/50 px-6 py-4 ">
+          <div className="flex items-center justify-between">
+            {/* <button
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium"
             >
-              {images.map((image, index) => (
-                <div
-                  key={image.id}
-                  className="relative group cursor-pointer flex-shrink-0"
-                  style={{ 
-                    width: `${100 / images.length}%`
-                  }}
-                  onClick={() => openFullscreen(index)}
-                >
-                  {/* Image Container */}
-                  <div className="relative w-full aspect-[4/3] rounded-lg sm:rounded-xl bg-slate-700 shadow-lg overflow-hidden">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover transition-all duration-300 group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                    />
-                    
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="text-center text-white transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                        <div className="bg-white/20 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-2 mx-auto w-fit">
-                          <Maximize2 className="w-4 h-4 sm:w-6 sm:h-6" />
-                        </div>
-                        <p className="text-xs sm:text-sm font-medium bg-black/50 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full">
-                          Click to expand
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Image Title at Bottom */}
-                    <div className="absolute bottom-2 left-2 right-2 bg-gradient-to-t from-black/80 to-transparent p-2 rounded-b-lg sm:rounded-b-xl">
-                      <h5 className="text-white font-semibold text-xs sm:text-sm truncate">
-                        {image.title}
-                      </h5>
-                      <p className="text-gray-300 text-xs truncate">
-                        {image.alt}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+              {isPlaying ? "Pause" : "Play"}
+            </button> */}
           </div>
         </div>
 
-        {/* Navigation Arrows */}
-        {images.length > visibleImages && (
-          <>
-            <button
-              onClick={prevSlide}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-2 sm:p-3 rounded-full transition-all duration-200 z-10 shadow-lg border border-slate-600 backdrop-blur-sm"
-              aria-label="Previous images"
+        {/* Main Image Display */}
+        <div 
+          className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden cursor-pointer group"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onClick={() => openFullscreen(currentIndex)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="absolute inset-0 flex items-center justify-center bg-slate-900/20"
             >
-              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-2 sm:p-3 rounded-full transition-all duration-200 z-10 shadow-lg border border-slate-600 backdrop-blur-sm"
-              aria-label="Next images"
-            >
-              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-          </>
-        )}
+              <div className="relative w-full h-full flex items-center justify-center p-4">
+                <Image
+                  src={carouselImages[currentIndex].src}
+                  alt={carouselImages[currentIndex].alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  className="object-contain"
+                  priority
+                />
+                
+                {/* Expand Icon Overlay */}
+                <div className="absolute top-4 right-4 bg-black/50 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <Maximize2 className="w-5 h-5 text-white" />
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
 
-        {/* Dots Indicator */}
-        {images.length > visibleImages && (
-          <div className="flex justify-center space-x-2 sm:space-x-3 mt-4 sm:mt-6">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  currentIndex === index
-                    ? 'w-6 sm:w-8 h-2 sm:h-3 bg-white'
-                    : 'w-2 sm:w-3 h-2 sm:h-3 bg-white/40 hover:bg-white/60'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        )}
+          {/* Navigation Arrows */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrev();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 z-10"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100 z-10"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
 
-        {/* Image Counter */}
-        <div className="text-center mt-3 sm:mt-4">
-          <p className="text-gray-400 text-xs sm:text-sm">
-            Showing {Math.min(currentIndex + visibleImages, images.length)} of {images.length} materials
+        {/* Image Title */}
+        <div className="bg-slate-900/50 px-6 py-3 ">
+          <p className="text-gray-400 text-center text-sm mt-1">
+            {currentIndex + 1} of {carouselImages.length}
           </p>
         </div>
+
+        {/* Dot Indicators */}
+        <div className="flex justify-center space-x-2 py-4 bg-slate-900/30">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                index === currentIndex
+                  ? "bg-blue-500 scale-125"
+                  : "bg-gray-500 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Thumbnail Strip (Mobile Hidden, Desktop Visible) */}
+        {/* <div className="hidden md:block bg-slate-900/30 p-4 border-t border-slate-700">
+          <div className="flex space-x-3 overflow-x-auto scrollbar-hide">
+            {carouselImages.map((image, index) => (
+              <button
+                key={image.id}
+                onClick={() => goToSlide(index)}
+                className={`flex-shrink-0 relative w-20 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                  index === currentIndex
+                    ? "border-blue-500 scale-105"
+                    : "border-slate-600 hover:border-slate-400 opacity-70 hover:opacity-100"
+                }`}
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="80px"
+                  className="object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        </div> */}
       </div>
 
       {/* Fullscreen Modal */}
       <AnimatePresence>
-        {isFullscreen && (
+        {showFullscreen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 sm:p-4"
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
             onClick={closeFullscreen}
           >
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Close Button */}
-              <button
-                onClick={closeFullscreen}
-                className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-black/70 hover:bg-black/90 text-white p-2 sm:p-3 rounded-full transition-all duration-200 z-20 shadow-lg"
-                aria-label="Close fullscreen"
-              >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
+            {/* Close Button */}
+            <button
+              onClick={closeFullscreen}
+              className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors duration-200 z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-              {/* Navigation Arrows */}
-              {images.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      prevFullscreenImage();
-                    }}
-                    className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-200 z-20 shadow-lg"
-                    aria-label="Previous image"
-                  >
-                    <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      nextFullscreenImage();
-                    }}
-                    className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 text-white p-3 sm:p-4 rounded-full transition-all duration-200 z-20 shadow-lg"
-                    aria-label="Next image"
-                  >
-                    <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
-                  </button>
-                </>
-              )}
+            {/* Navigation Arrows */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prevFullscreen();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-4 rounded-full transition-colors duration-200 z-10"
+            >
+              <ChevronLeft className="w-8 h-8" />
+            </button>
 
-              {/* Fullscreen Image */}
-              <motion.div
-                key={fullscreenIndex}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                className="relative w-full h-full max-w-7xl max-h-[85vh]"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <Image
-                  src={images[fullscreenIndex].src}
-                  alt={images[fullscreenIndex].alt}
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  sizes="100vw"
-                  priority
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextFullscreen();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-4 rounded-full transition-colors duration-200 z-10"
+            >
+              <ChevronRight className="w-8 h-8" />
+            </button>
+
+            {/* Fullscreen Image */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative w-[90vw] h-[80vh] max-w-6xl max-h-[80vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={carouselImages[fullscreenIndex].src}
+                alt={carouselImages[fullscreenIndex].alt}
+                fill
+                sizes="90vw"
+                className="object-contain"
+                priority
+              />
+            </motion.div>
+
+            {/* Fullscreen Title */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+              <p className="text-gray-300">
+                {fullscreenIndex + 1} of {carouselImages.length}
+              </p>
+            </div>
+
+            {/* Fullscreen Dots */}
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex space-x-2">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFullscreenIndex(index);
+                  }}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === fullscreenIndex
+                      ? "bg-white scale-125"
+                      : "bg-gray-500 hover:bg-gray-300"
+                  }`}
                 />
-              </motion.div>
-
-              {/* Image Info */}
-              <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 text-center text-white px-4">
-                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">
-                  {images[fullscreenIndex].title}
-                </h3>
-                <p className="text-gray-300 mb-1 text-sm sm:text-base">
-                  {images[fullscreenIndex].alt}
-                </p>
-                <p className="text-xs sm:text-sm text-gray-400">
-                  {fullscreenIndex + 1} of {images.length}
-                </p>
-              </div>
-
-              {/* Thumbnail Navigation */}
-              <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-1 sm:space-x-2 max-w-full overflow-x-auto pb-2 px-4 scrollbar-hide">
-                <div className="flex space-x-1 sm:space-x-2">
-                  {images.map((image, index) => (
-                    <button
-                      key={image.id}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setFullscreenIndex(index);
-                      }}
-                      className={`relative w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                        index === fullscreenIndex
-                          ? 'border-white shadow-lg scale-110'
-                          : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'
-                      }`}
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 48px, 64px"
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style jsx global>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </>
   );
 };
