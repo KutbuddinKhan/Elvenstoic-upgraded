@@ -23,12 +23,6 @@ const Upsell2HeroSection = () => {
           Turn Your Instagram Following Into a Real Business That Pays You Every
           Single Month
         </p>
-        {/* <div className="bg-amber-900/20 border-l-4 border-amber-500 p-4 mb-6">
-          <p className="text-lg font-semibold text-amber-200">
-            This is NOT part of Cinematic Studio Growth System - This is the
-            MONETIZATION layer.
-          </p>
-        </div> */}
       </motion.div>
 
       {/* Reality Check Section */}

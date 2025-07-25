@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Clock, Lock, RocketIcon, TrendingUp } from "lucide-react";
+import { Check, Clock, RocketIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Upsell2HeroSection from "@/components/upsell-2/UpsellTwoHeroSection";
 import UpsellTwoContentSection from "@/components/upsell-2/UpsellTwoContentSection";
@@ -86,7 +86,7 @@ const Upsell2Page = () => {
                 >
                   <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
                   <span className="text-center">
-                    UNLOCK THE MONETIZATION ENGINE NOW
+                    Unlock the Beginner friendly monetization System now
                   </span>
                 </button>
               </div>

@@ -73,7 +73,7 @@ const UpsellTwoContentSection = () => {
         <h3 className="text-2xl font-bold text-white mb-6 text-center">
           🎁 EXCLUSIVE BONUSES:
         </h3>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-6">
           {bonuses.map((bonus, index) => (
             <div
               key={index}
@@ -83,7 +83,40 @@ const UpsellTwoContentSection = () => {
                 <span className="text-xl">{bonus.icon}</span>
                 Bonus #{index + 1}: {bonus.title}
               </h4>
-              <p className="text-amber-200">{bonus.description}</p>
+              <p className="text-amber-200 mb-4">{bonus.description}</p>
+              
+              {/* Add features list if the bonus has features */}
+              {bonus.features && (
+                <ul className="space-y-2 mb-4">
+                  {bonus.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-amber-400 mt-1 flex-shrink-0" />
+                      <span className="text-amber-100">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Add image if the bonus has an image */}
+              {bonus.image && (
+                <div className="mb-4">
+                  <Image
+                    src={bonus.image}
+                    alt={bonus.title}
+                    width={800}
+                    height={450}
+                    className="rounded-lg w-full h-auto object-contain"
+                    priority
+                  />
+                </div>
+              )}
+
+              {/* Add result if the bonus has a result */}
+              {bonus.result && (
+                <div className="bg-amber-900/30 border border-amber-700/50 rounded-lg p-3">
+                  <p className="text-amber-300 font-semibold">{bonus.result}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -114,7 +147,7 @@ const UpsellTwoContentSection = () => {
             <p className="text-purple-200">Build a massive following</p>
           </div>
           <div className="bg-green-900/30 rounded-lg p-4 border border-green-700/50">
-            <h4 className="font-bold text-green-300 mb-2">Studio Pro</h4>
+            <h4 className="font-bold text-green-300 mb-2">Monetization system</h4>
             <p className="text-green-200">Turn that following into $$$$$</p>
           </div>
         </div>
@@ -160,8 +193,6 @@ const UpsellTwoContentSection = () => {
               </div>
             ))}
           </div>
-
-         
 
           <p className="text-sm text-gray-400 mt-2">
             Click any image above to view it in full screen and browse through

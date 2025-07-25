@@ -120,7 +120,7 @@ const Upsell1Popup: React.FC<Upsell1PopupProps> = ({
             className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-sm md:text-base font-bold py-3 transition-all duration-300" 
             onClick={onAccept}
           >
-            🔓 YES, Add The VIP System To My Order Now!
+            🔓 YES, Add The Growth System To My Order Now!
           </Button>
           <Button 
             variant="secondary" 

@@ -13,7 +13,7 @@ const Downsell1Page = () => {
     const router = useRouter();
 
     const handleDecline = () => {
-        setShowPopup(true); 
+        setShowPopup(true);
     };
 
     const handleAccept = () => {
@@ -55,7 +55,7 @@ const Downsell1Page = () => {
             <div className="relative z-10 max-w-4xl mx-auto px-4 py-8">
                 {/* Hero Section Component */}
                 <Downsell1HeroSection />
-                
+
                 {/* Content Section Component */}
                 <Downsell1ContentSection />
 
@@ -84,10 +84,10 @@ const Downsell1Page = () => {
                                 onClick={handleAccept}
                                 className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
                             >
-                                ✅ YES - Give Me The VIP System for €97!
+                                ✅ YES - Give me the growth system behind 1.000.000 followers for 97€
                             </button>
                         </motion.div>
-                        
+
                         <p className="text-base md:text-lg text-green-400 font-semibold">
                             Smart move. Let's build your empire together.
                         </p>
@@ -101,7 +101,7 @@ const Downsell1Page = () => {
 
                         <div className="flex items-center justify-center gap-2 text-sm text-red-400 mt-6">
                             <span>I understand. But remember - this chance won't come again.
-</span>
+                            </span>
                         </div>
                     </div>
                 </motion.div>
