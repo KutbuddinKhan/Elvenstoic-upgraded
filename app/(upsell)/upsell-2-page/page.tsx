@@ -73,20 +73,23 @@ const Upsell2Page = () => {
             </p>
 
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative group mt-6 inline-block"
+              className="mt-6 w-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
-              <button
-                onClick={handleAccept}
-                className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
-              >
-                <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
-                <span className="whitespace-nowrap">
-                  UNLOCK THE MONETIZATION ENGINE NOW
-                </span>
-              </button>
+              <div className="relative w-full rounded-lg overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-200" />
+
+                <button
+                  onClick={handleAccept}
+                  className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+                >
+                  <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
+                  <span className="text-center">
+                    UNLOCK THE MONETIZATION ENGINE NOW
+                  </span>
+                </button>
+              </div>
             </motion.div>
 
             {/* Payment Icons */}
@@ -100,6 +103,7 @@ const Upsell2Page = () => {
               />
             </div>
           </div>
+
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-blue-100/70 mb-6">
             <span className="flex items-center gap-2">
