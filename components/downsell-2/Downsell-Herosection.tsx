@@ -8,7 +8,7 @@ import Image from 'next/image';
 const Downsell2HeroSection = () => {
     return (
         <>
-            {/* Main Header */}
+            {/* Main Header */} 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -193,103 +193,6 @@ const Downsell2HeroSection = () => {
                             But unlike those things? This investment pays you back 50x over.
                         </p>
                     </div>
-                </div>
-            </motion.div>
-
-            {/* CTA Section with Payment Options */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-                className="text-center mb-12 px-4"
-            >
-                <p className="text-base md:text-lg font-semibold text-yellow-400 mb-6">
-                    Choose Your Investment Level:
-                </p>
-
-                {/* Payment Options */}
-                <div className="space-y-6 max-w-2xl mx-auto">
-                    {/* Full Payment Option */}
-                    <div className="bg-slate-800/50 border-2 border-green-500/50 rounded-xl p-4 sm:p-6 shadow-xl backdrop-blur-sm">
-                        <div className="flex flex-col gap-2 mb-4">
-                            <p className="text-lg sm:text-xl md:text-2xl font-bold text-green-400">
-                                Best Value: Full Payment €197
-                            </p>
-                            <p className="text-sm sm:text-base text-green-300">
-                                Save €94 compared to payment plan
-                            </p>
-                        </div>
-
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="relative group w-full mb-4"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
-                            <button
-                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-green-500/50"
-                            >
-                                <Lock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
-                                <span className="whitespace-nowrap">
-                                    GET FULL ACCESS FOR €197
-                                </span>
-                            </button>
-                        </motion.div>
-                    </div>
-
-                    {/* Payment Plan Option */}
-                    <div className="bg-slate-800/50 border-2 border-blue-500/50 rounded-xl p-4 sm:p-6 shadow-xl backdrop-blur-sm">
-                        <div className="flex flex-col gap-2 mb-4">
-                            <p className="text-lg sm:text-xl md:text-2xl font-bold text-blue-400">
-                                Payment Plan: 3x €97
-                            </p>
-                            <p className="text-sm sm:text-base text-blue-300">
-                                Same access, easier on your budget
-                            </p>
-                        </div>
-
-                        <motion.div
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="relative group w-full mb-4"
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
-                            <button
-                                className="relative z-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-blue-500/50"
-                            >
-                                <span className="whitespace-nowrap">
-                                    💳 PAYMENT PLAN: 3x €97
-                                </span>
-                            </button>
-                        </motion.div>
-                    </div>
-
-                    {/* Payment Icons */}
-                    <div className="flex justify-center mt-6">
-                        <Image
-                            src="/upsell-1/cards.png"
-                            alt="Payment Methods"
-                            width={220}
-                            height={30}
-                            className="h-auto w-full max-w-[240px]"
-                            priority
-                        />
-                    </div>
-                </div>
-
-                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-yellow-400 mb-6 mt-6">
-                    <span className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-yellow-400" />
-                        Instant Access
-                    </span>
-                    <span className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-yellow-400" />
-                        60-Day Money-Back Guarantee
-                    </span>
-                    <span className="flex items-center gap-2">
-                        <Check className="w-4 h-4 text-yellow-400" />
-                        Available Only on This Page
-                    </span>
                 </div>
             </motion.div>
         </>

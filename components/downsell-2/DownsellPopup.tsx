@@ -1,9 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { AlertTriangle, Clock, X } from 'lucide-react'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 
@@ -23,29 +22,66 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
   onClose,
 }) => {
   const [countdown, setCountdown] = useState(10)
+  const popupRef = useRef<HTMLDivElement>(null)
 
+  // Auto-close popup after 10 seconds
   useEffect(() => {
     if (isOpen && countdown > 0) {
       const timer = setTimeout(() => setCountdown(prev => prev - 1), 1000)
       return () => clearTimeout(timer)
     } else if (countdown === 0) {
-      onDecline()
+      onClose()
     }
-  }, [isOpen, countdown, onDecline])
+  }, [isOpen, countdown, onClose])
+
+  // Handle click outside to close popup
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }
+  }, [isOpen, onClose])
+
+  // Handle escape key to close popup
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscapeKey)
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey)
+      }
+    }
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
+        ref={popupRef}
+        initial={{ opacity: 0, y: -30, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -30, scale: 0.95 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border border-slate-700/50 rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 backdrop-blur-sm"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 transition-colors duration-200"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 transition-colors duration-200 z-10"
         >
           <X className="w-6 h-6" />
         </button>
@@ -66,7 +102,7 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
         {/* Countdown */}
         <div className="bg-gradient-to-r from-red-900/60 to-red-800/60 border border-red-600/50 text-white rounded-lg p-4 text-center mb-6 backdrop-blur-sm">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Clock className="w-5 h-5" />
+            <Clock className="w-5 h-5 animate-pulse" />
             <span className="font-semibold">This popup closes in:</span>
           </div>
           <div className="text-3xl font-bold text-red-300">{countdown} seconds</div>
