@@ -16,10 +16,10 @@ const Downsell2HeroSection = () => {
                 className="text-center mb-12"
             >
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                    You Just Said No to €297. <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">I Get It.</span>
+                    You just said no to the Cinematic Studio Monetization System for 297€. <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-400">I Get It.</span>
                 </h1>
-                <h2 className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-400 mb-6">
-                    But What If You Could Get EVERYTHING for €197?
+                <h2 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-400 mb-6">
+                    But what if you could get the exact monetization system that makes me 10-20k/m for just 197€?
                 </h2>
             </motion.div>
 

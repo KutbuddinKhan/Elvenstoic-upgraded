@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, X } from "lucide-react";
+import { Check, RocketIcon, X } from "lucide-react";
 import Image from "next/image";
 import { bonuses, modules, targetAudience } from "@/data/upsell-data/upsell-2";
 import ImageCarousel from "./Carousel";
@@ -84,7 +84,7 @@ const UpsellTwoContentSection = () => {
                 Bonus #{index + 1}: {bonus.title}
               </h4>
               <p className="text-amber-200 mb-4">{bonus.description}</p>
-              
+
               {/* Add features list if the bonus has features */}
               {bonus.features && (
                 <ul className="space-y-2 mb-4">
@@ -121,6 +121,44 @@ const UpsellTwoContentSection = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* CTA  */}
+      <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-12 w-full">
+        <p className="text-base md:text-lg text-yellow-400 font-medium mb-2">
+          One-Time Investment: €297
+        </p>
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="mt-6 w-full"
+        >
+          <div className="relative w-full rounded-lg overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-200" />
+
+            <button
+              // onClick={handleAccept}
+              className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+            >
+              <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
+              <span className="text-center">
+                Unlock the $10k/m Monetization System
+              </span>
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Payment Icons */}
+        <div className="flex justify-center mt-4">
+          <Image
+            src="/upsell-1/cards.png"
+            alt="Payment Methods"
+            width={220}
+            height={30}
+            className="h-auto w-full max-w-[240px]"
+          />
+        </div>
+      </div>
 
       {/* System Breakdown */}
       <motion.div
@@ -184,9 +222,8 @@ const UpsellTwoContentSection = () => {
                   <X className="w-5 h-5 text-red-400 flex-shrink-0" />
                 )}
                 <span
-                  className={`text-lg ${
-                    item.isFor ? "text-green-300" : "text-red-300"
-                  }`}
+                  className={`text-lg ${item.isFor ? "text-green-300" : "text-red-300"
+                    }`}
                 >
                   {item.text}
                 </span>
@@ -208,7 +245,7 @@ const UpsellTwoContentSection = () => {
         transition={{ duration: 0.6, delay: 2.6 }}
         className="mb-12"
       >
-         <ImageCarousel  />
+        <ImageCarousel />
       </motion.div>
     </>
   );
