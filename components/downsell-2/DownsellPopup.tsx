@@ -113,8 +113,8 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
         <div className="space-y-6 text-slate-200">
           <div className="bg-gradient-to-r from-yellow-900/40 to-yellow-800/40 border border-yellow-600/50 rounded-lg p-5 backdrop-blur-sm">
             <h3 className="text-xl font-bold mb-3 text-yellow-300">STOP AND THINK:</h3>
-            <p className="text-yellow-200/90">You're about to reject a payment plan of <strong className="text-yellow-300">€97</strong>.</p>
-            <p className="text-lg font-bold mt-2 mb-2 text-yellow-300">€97.</p>
+            <p className="text-yellow-200/90">You're about to reject a payment plan of <strong className="text-yellow-300">€197</strong>.</p>
+            <p className="text-lg font-bold mt-2 mb-2 text-yellow-300">€197.</p>
             <p className="text-yellow-200/90">That's literally:</p>
             <ul className="list-disc ml-6 mt-2 space-y-1 text-yellow-200/80">
               <li>2 Uber Eats orders</li>
@@ -142,7 +142,7 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
 
           <div className="bg-gradient-to-r from-red-900/40 to-red-800/40 border border-red-600/50 rounded-lg p-5 backdrop-blur-sm">
             <h3 className="text-xl font-bold text-red-300 mb-2">Here's The Harsh Truth:</h3>
-            <p className="text-red-200/90">If you can't invest €97 x 3 in your own business...</p>
+            <p className="text-red-200/90">If you can't invest €197 x 3 in your own business...</p>
             <p className="font-semibold mt-1 text-red-300">You've already decided to fail.</p>
             <p className="mt-2 text-red-200/90">Every successful creator I know would have <strong className="text-red-300">KILLED</strong> for this opportunity.</p>
             <ul className="list-disc ml-6 mt-2 space-y-1 text-red-200/80">
@@ -176,7 +176,7 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
 
         {/* CTA Buttons */}
         <div className="space-y-4 mt-8">
-          <motion.div
+          {/* <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="relative group w-full"
@@ -188,10 +188,10 @@ const Downsell2Popup: React.FC<Downsell2PopupProps> = ({
             >
               💚 WAIT! I WANT THE PAYMENT PLAN - 3x €97
             </Button>
-          </motion.div>
-          <p className="text-center text-green-400 font-medium text-sm sm:text-base">
+          </motion.div> */}
+          {/* <p className="text-center text-green-400 font-medium text-sm sm:text-base">
             Thank god. You scared me there.
-          </p>
+          </p> */}
 
           <motion.div
             whileHover={{ scale: 1.02 }}

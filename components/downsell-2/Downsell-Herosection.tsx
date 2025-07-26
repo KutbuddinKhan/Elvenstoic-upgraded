@@ -47,7 +47,7 @@ const Downsell2HeroSection = () => {
             </motion.div>
 
             {/* One Time Only Offer */}
-            <motion.div
+            {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -81,7 +81,7 @@ const Downsell2HeroSection = () => {
                         The ONLY difference? I'm eating the loss to help you win.
                     </p>
                 </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Why Would I Do This */}
             <motion.div
