@@ -85,7 +85,7 @@ const ThankYouPage = () => {
                                 </div>
 
                                 <a href="https://form.typeform.com/to/GIermSYB?typeform-source=www.google.com" target="_blank" rel="noopener noreferrer">
-                                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25">
+                                    <button className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/25">
                                         CLICK HERE TO SHARE YOUR VISION
                                     </button>
                                 </a>
