@@ -68,9 +68,11 @@ const ThankYouPage = () => {
                                 1
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
-                                    📋 Tell Me About Your Creator Dreams <span className="text-blue-400 text-lg ml-2">(2 mins)</span>
+                                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 flex flex-col sm:flex-row sm:items-center">
+                                    <span>📋 Tell Me About Your Creator Dreams</span>
+                                    <span className="text-blue-400 text-sm sm:text-lg sm:ml-2 mt-1 sm:mt-0">(2 mins)</span>
                                 </h3>
+
 
                                 <p className="text-slate-200 mb-4 leading-relaxed">
                                     I've prepared a quick form to understand exactly where you are and where you want to be. This helps me tailor future content, tutorials, and updates specifically for YOUR success.
