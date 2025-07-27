@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, RocketIcon, X } from "lucide-react";
 import Image from "next/image";
@@ -8,6 +8,15 @@ import { bonuses, modules, targetAudience } from "@/data/upsell-data/upsell-2";
 import ImageCarousel from "./Carousel";
 
 const UpsellTwoContentSection = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAccept = () => {
+    setIsLoading(true);
+    // Redirect to CopeCart checkout for Upsell 2 (297€ Studio Pro Monetization System)
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=2&price=297";
+    window.location.href = copeCartUrl;
+  };
+
   return (
     <>
       {/* Modules Section */}
@@ -122,43 +131,68 @@ const UpsellTwoContentSection = () => {
         </div>
       </motion.div>
 
-      {/* CTA  */}
-      <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl mb-12 w-full">
-        <p className="text-base md:text-lg text-yellow-400 font-medium mb-2">
-          One-Time Investment: €297
-        </p>
+      {/* CTA Section with CopeCart Integration */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1.6 }}
+        className="text-center mb-12"
+      >
+        <div className="bg-white/5 border-2 border-dashed border-yellow-400 rounded-xl p-4 sm:p-6 max-w-xl mx-auto shadow-xl w-full">
+          <p className="text-base md:text-lg text-yellow-400 font-medium mb-2">
+            One-Time Investment: €297
+          </p>
 
-        <motion.div
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="mt-6 w-full"
-        >
-          <div className="relative w-full rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-200" />
+          <motion.div
+            whileHover={{ scale: isLoading ? 1 : 1.02 }}
+            whileTap={{ scale: isLoading ? 1 : 0.98 }}
+            className="mt-6 w-full"
+          >
+            <div className="relative w-full rounded-lg overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-200" />
 
-            <button
-              // onClick={handleAccept}
-              className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
-            >
-              <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
-              <span className="text-center">
-                Unlock the $10k/m Monetization System
-              </span>
-            </button>
+              <button
+                onClick={handleAccept}
+                disabled={isLoading}
+                className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-70 disabled:cursor-not-allowed text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+              >
+                <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
+                <span className="text-center">
+                  {isLoading ? "PROCESSING..." : "Unlock the €10k/m Monetization System"}
+                </span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Payment Icons */}
+          <div className="flex justify-center mt-4">
+            <Image
+              src="/upsell-1/cards.png"
+              alt="Payment Methods"
+              width={220}
+              height={30}
+              className="h-auto w-full max-w-[240px]"
+              priority
+            />
           </div>
-        </motion.div>
-
-        {/* Payment Icons */}
-        <div className="flex justify-center mt-4">
-          <Image
-            src="/upsell-1/cards.png"
-            alt="Payment Methods"
-            width={220}
-            height={30}
-            className="h-auto w-full max-w-[240px]"
-          />
         </div>
-      </div>
+
+        {/* Trust Indicators */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-blue-100/70 mt-4">
+          <span className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-yellow-400" />
+            Instant Access
+          </span>
+          <span className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-yellow-400" />
+            Lifetime Updates
+          </span>
+          <span className="flex items-center gap-2">
+            <Check className="w-4 h-4 text-yellow-400" />
+            60-Day Guarantee
+          </span>
+        </div>
+      </motion.div>
 
       {/* System Breakdown */}
       <motion.div

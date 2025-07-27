@@ -12,6 +12,7 @@ import Image from "next/image";
 
 const Upsell2Page = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleDecline = () => {
@@ -19,8 +20,23 @@ const Upsell2Page = () => {
   };
 
   const handleAccept = () => {
-    // Handle upgrade to Studio Pro - redirect to CopeCart or next step
-    // window.location.href = '/checkout'; // Or CopeCart upgrade URL
+    setIsLoading(true);
+    // Redirect to CopeCart checkout for Upsell 2 (297€ Studio Pro Monetization System)
+    // Replace with your actual CopeCart product URL for Upsell 2
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=2&price=297";
+    window.location.href = copeCartUrl;
+  };
+
+  const handlePopupAccept = () => {
+    // When user accepts from popup, redirect to CopeCart (same as main accept)
+    setIsLoading(true);
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=2&price=297";
+    window.location.href = copeCartUrl;
+  };
+
+  const handlePopupDecline = () => {
+    // When user declines from popup, redirect to downsell-1 page
+    router.push("/downsell-1");
   };
 
   return (
@@ -73,20 +89,21 @@ const Upsell2Page = () => {
             </p>
 
             <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: isLoading ? 1 : 1.02 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
               className="mt-6 w-full"
             >
-              <div className="relative w-full rounded-lg overflow-hidden">
+              <div className="relative w-full rounded-lg overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 blur-sm opacity-75 group-hover:opacity-100 transition duration-200" />
 
                 <button
                   onClick={handleAccept}
-                  className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+                  disabled={isLoading}
+                  className="relative z-10 w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-70 disabled:cursor-not-allowed text-gray-900 font-bold text-xs sm:text-sm md:text-base px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
                 >
                   <RocketIcon className="w-4 h-4 md:w-6 md:h-6 flex-shrink-0" />
                   <span className="text-center">
-                    Unlock the Beginner friendly monetization System now
+                    {isLoading ? "PROCESSING..." : "Unlock the Monetization System Now"}
                   </span>
                 </button>
               </div>
@@ -100,10 +117,10 @@ const Upsell2Page = () => {
                 width={220}
                 height={30}
                 className="h-auto w-full max-w-[240px]"
+                priority
               />
             </div>
           </div>
-
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-6 text-sm text-blue-100/70 mb-6">
             <span className="flex items-center gap-2">
@@ -120,7 +137,23 @@ const Upsell2Page = () => {
             </span>
           </div>
 
-          <div className="space-y-4">
+          {/* Second CTA Button */}
+          <div className="space-y-5 mb-8">
+            <motion.div
+              whileHover={{ scale: isLoading ? 1 : 1.05 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
+              className="relative inline-block group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-md opacity-80 group-hover:opacity-100 transition duration-300 z-0" />
+              <button
+                onClick={handleAccept}
+                disabled={isLoading}
+                className="relative z-10 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold text-lg md:text-xl px-8 md:px-12 py-4 rounded-xl transition-all duration-300 shadow-lg border border-blue-700/60 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                🚀 {isLoading ? "PROCESSING..." : "YES! ADD MONETIZATION SYSTEM TO MY ORDER"}
+              </button>
+            </motion.div>
+
             <div className="flex items-center justify-center gap-2 text-sm text-amber-400">
               <Clock className="w-4 h-4" />
               <span>This page self-destructs when you leave</span>
@@ -128,7 +161,8 @@ const Upsell2Page = () => {
 
             <button
               onClick={handleDecline}
-              className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300"
+              disabled={isLoading}
+              className="block mx-auto text-red-400 hover:text-red-500 disabled:opacity-50 disabled:cursor-not-allowed underline text-sm transition-colors duration-300"
             >
               No thanks, I'll keep creating for free
             </button>
@@ -163,13 +197,8 @@ const Upsell2Page = () => {
             <Upsell2Popup
               isOpen={showPopup}
               onClose={() => setShowPopup(false)}
-              onAccept={() => {
-                // Handle final acceptance
-                window.location.href = "/checkout"; // Or CopeCart URL
-              }}
-              onDecline={() => {
-                router.push("/downsell-2-page");
-              }}
+              onAccept={handlePopupAccept}
+              onDecline={handlePopupDecline}
             />
           </motion.div>
         </div>

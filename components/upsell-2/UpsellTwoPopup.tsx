@@ -26,6 +26,20 @@ const Upsell2Popup: React.FC<Upsell2PopupProps> = ({
   onDecline,
   onClose,
 }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleAccept = () => {
+    setIsLoading(true);
+    // Redirect to CopeCart checkout for Upsell 2 (297€ Studio Pro Monetization System)
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=2&price=297";
+    window.location.href = copeCartUrl;
+  };
+
+  const handleDecline = () => {
+    setIsLoading(true);
+    onDecline(); // This will navigate to downsell-1 page
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="w-[95vw] max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-xl shadow-xl p-4 sm:p-6 md:p-8 text-white">
@@ -103,13 +117,12 @@ const Upsell2Popup: React.FC<Upsell2PopupProps> = ({
             <p className='mt-2 text-red-400 font-semibold'>After you close this pop-up:</p>
             <ul className="list-disc pl-5 space-y-2 mt-2">
               <li className="text-red-400">Price goes to <strong>€497 forever</strong></li>
-              <li className="text-red-400">You’ll NEVER see this offer again</li>
-              <li className="text-red-400">You’ll be left to figure it out alone</li>
+              <li className="text-red-400">You'll NEVER see this offer again</li>
+              <li className="text-red-400">You'll be left to figure it out alone</li>
             </ul>
             <p className="mt-2 text-red-400 font-semibold">
               While you're struggling to monetize... <br />
               I'll be making another €50 from the automated systems you just rejected.
-
             </p>
           </div>
 
@@ -130,35 +143,35 @@ const Upsell2Popup: React.FC<Upsell2PopupProps> = ({
           {/* Final Choices */}
           <div className="space-y-4">
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: isLoading ? 1 : 1.02 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onAccept();
+                handleAccept();
               }}
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
+              disabled={isLoading}
+              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-70 disabled:cursor-not-allowed text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-0 group-hover:opacity-75 transition duration-200 -z-10" />
-              💰 YES! I Want to Make Real Money - Give Me The System!
+              💰 {isLoading ? "PROCESSING..." : "YES! I Want to Make Real Money - Give Me The System!"}
             </motion.button>
 
-            <p className="text-sm text-green-300 italic">Smart choice. Let's build your €10K/month business.
-            </p>
+            <p className="text-sm text-green-300 italic">Smart choice. Let's build your €10K/month business.</p>
 
             <button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onDecline();
+                handleDecline();
               }}
-              className="bg-slate-700/50 hover:bg-slate-600/50 text-slate-300 hover:text-slate-200 text-sm md:text-base font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg transition duration-300 border border-slate-600/50 w-full"
+              disabled={isLoading}
+              className="bg-slate-700/50 hover:bg-slate-600/50 disabled:opacity-70 disabled:cursor-not-allowed text-slate-300 hover:text-slate-200 text-sm md:text-base font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg transition duration-300 border border-slate-600/50 w-full"
             >
-              ❌ No, I Prefer Working for Free
+              {isLoading ? "PROCESSING..." : "❌ No, I Prefer Working for Free"}
             </button>
 
-            <p className="text-sm text-slate-400 italic">I hope you don't regret this forever...
-            </p>
+            <p className="text-sm text-slate-400 italic">I hope you don't regret this forever...</p>
           </div>
         </motion.div>
       </DialogContent>

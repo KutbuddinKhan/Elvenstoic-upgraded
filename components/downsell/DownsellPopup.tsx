@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, AlertTriangle } from 'lucide-react';
+import { X, AlertTriangle, Clock } from 'lucide-react';
 
 interface Downsell1PopupProps {
   isOpen: boolean;
@@ -17,6 +17,8 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
   onAccept,
   onDecline,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   // Handle ESC key press
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -51,6 +53,19 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
     e.preventDefault();
     e.stopPropagation();
     onClose();
+  };
+
+  const handleAcceptClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsLoading(true);
+    onAccept();
+  };
+
+  const handleDeclineClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onDecline();
   };
 
   return (
@@ -201,30 +216,32 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
               Final Time - Your Two Choices
             </h2>
 
+            {/* <div className="bg-white/5 border-2 border-dashed border-green-400 rounded-xl p-4 md:p-6 mb-6">
+              <p className="text-lg md:text-xl text-green-400 font-bold mb-2">
+                Last Chance: €97 (Worth €1,782)
+              </p>
+              <p className="text-sm md:text-base text-green-200/80 mb-4">
+                Complete 1M+ Follower Growth System
+              </p>
+            </div> */}
+
             {/* Final Choices */}
             <div className="space-y-4">
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onAccept();
-                }}
-                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
+                whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                onClick={handleAcceptClick}
+                disabled={isLoading}
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-70 disabled:cursor-not-allowed text-white text-base md:text-lg font-bold py-3 md:py-4 px-6 md:px-8 rounded-lg w-full transition duration-300 border border-green-500/50 relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-0 group-hover:opacity-75 transition duration-200 -z-10" />
-                💚 YES! I'M NOT CRAZY - GIVE ME THE SYSTEM FOR €97
+                💚 {isLoading ? "PROCESSING PAYMENT..." : "YES! I'M NOT CRAZY - GIVE ME THE SYSTEM FOR €97"}
               </motion.button>
 
               <p className="text-sm text-green-300 italic">Thank god. You scared me for a second there.</p>
 
               <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onDecline();
-                }}
+                onClick={handleDeclineClick}
                 className="bg-slate-700/50 hover:bg-slate-600/50 text-slate-300 hover:text-slate-200 text-sm md:text-base font-medium py-2 md:py-3 px-4 md:px-6 rounded-lg transition duration-300 border border-slate-600/50 w-full"
               >
                 ❌ No, I Want to Stay Small
@@ -232,8 +249,17 @@ const Downsell1Popup: React.FC<Downsell1PopupProps> = ({
 
               <p className="text-sm text-slate-400 italic">I hope you don't regret this decision for the rest of your life.</p>
 
-              <p className="text-xs md:text-sm text-slate-500 italic mt-3 px-2">
-                This pop-up will close in a couple seconds and never appear again. Choose wisely.
+              <div className="flex items-center justify-center gap-2 text-xs md:text-sm text-red-400 mt-4">
+                <Clock className="w-4 h-4" />
+                <span>This popup closes in 20 seconds and never appears again</span>
+              </div>
+            </div>
+
+            {/* Final Warning */}
+            <div className="mt-6 bg-red-900/20 border border-red-600/30 rounded-lg p-4">
+              <p className="text-xs md:text-sm text-red-300 font-semibold">
+                ⚠️ FINAL WARNING: After this popup closes, you'll pay €497+ for this system. 
+                This €97 offer dies with this popup.
               </p>
             </div>
           </motion.div>

@@ -12,6 +12,7 @@ import Image from "next/image";
 
 const Upsell1Page = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleDecline = () => {
@@ -19,8 +20,23 @@ const Upsell1Page = () => {
   };
 
   const handleAccept = () => {
-    // Handle upgrade to VIP - redirect to CopeCart or next step
-    // window.location.href = '/upsell-2'; // Or CopeCart upgrade URL
+    setIsLoading(true);
+    // Redirect to CopeCart checkout for Upsell 1 (197€ Cinematic Studio Growth System)
+    // Replace with your actual CopeCart product URL for Upsell 1
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=1&price=197";
+    window.location.href = copeCartUrl;
+  };
+
+  const handlePopupAccept = () => {
+    // When user accepts from popup, redirect to CopeCart (same as main accept)
+    setIsLoading(true);
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=1&price=197";
+    window.location.href = copeCartUrl;
+  };
+
+  const handlePopupDecline = () => {
+    // When user declines from popup, redirect to upsell-2-page
+    router.push("/upsell-2-page");
   };
 
   return (
@@ -58,7 +74,6 @@ const Upsell1Page = () => {
             YES! I Want The Complete Growth System That Created 1,000,000+ Followers
           </h3>
 
-
           <p className="text-base md:text-lg font-semibold text-yellow-100 mb-6">
             Unlock Cinematic Studio Growth System for Just €197
           </p>
@@ -76,21 +91,21 @@ const Upsell1Page = () => {
             </div>
 
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: isLoading ? 1 : 1.05 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
               className="relative group w-full"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
               <button
                 onClick={handleAccept}
-                className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
+                disabled={isLoading}
+                className="relative z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 disabled:opacity-70 disabled:cursor-not-allowed text-gray-900 font-bold text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-3 md:px-8 md:py-4 rounded-lg transition-colors duration-300 w-full inline-flex items-center justify-center gap-2 md:gap-3 border border-yellow-400/50"
               >
                 <Lock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
                 <span className="whitespace-nowrap">
-                  UPGRADE NOW FOR ONLY €197
+                  {isLoading ? "PROCESSING..." : "UPGRADE NOW FOR ONLY €197"}
                 </span>
               </button>
-
             </motion.div>
 
             {/* Payment Icons */}
@@ -122,7 +137,6 @@ const Upsell1Page = () => {
           </div>
         </motion.div>
 
-
         {/* Guarantee Section Component */}
         <UpsellGuaranteeSection />
 
@@ -152,16 +166,17 @@ const Upsell1Page = () => {
 
           <div className="space-y-5">
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: isLoading ? 1 : 1.05 }}
+              whileTap={{ scale: isLoading ? 1 : 0.98 }}
               className="relative inline-block group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-md opacity-80 group-hover:opacity-100 transition duration-300 z-0" />
               <button
                 onClick={handleAccept}
-                className="relative z-10 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 text-white font-semibold text-lg md:text-xl px-8 md:px-12 py-4 rounded-xl transition-all duration-300 shadow-lg border border-blue-700/60 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={isLoading}
+                className="relative z-10 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold text-lg md:text-xl px-8 md:px-12 py-4 rounded-xl transition-all duration-300 shadow-lg border border-blue-700/60 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                🚀 YES! UPGRADE MY ORDER NOW
+                🚀 {isLoading ? "PROCESSING..." : "YES! UPGRADE MY ORDER NOW"}
               </button>
             </motion.div>
 
@@ -174,7 +189,8 @@ const Upsell1Page = () => {
 
             <button
               onClick={handleDecline}
-              className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300"
+              disabled={isLoading}
+              className="block mx-auto text-red-400 hover:text-red-500 disabled:opacity-50 disabled:cursor-not-allowed underline text-sm transition-colors duration-300"
             >
               No thanks, I'll pass on this one-time opportunity
             </button>
@@ -193,8 +209,8 @@ const Upsell1Page = () => {
             <Upsell1Popup
               isOpen={showPopup}
               onClose={() => setShowPopup(false)}
-              onAccept={() => router.push("/upsell-2")}
-              onDecline={() => router.push("/downsell-1-page")}
+              onAccept={handlePopupAccept}
+              onDecline={handlePopupDecline}
             />
           </motion.div>
         </div>

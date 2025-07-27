@@ -25,6 +25,8 @@ const Upsell1Popup: React.FC<Upsell1PopupProps> = ({
   onDecline,
   onClose,
 }) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const features = [
     'The 0-1M Follower Blueprint (exactly how I did it)',
     '80K+ Monthly Growth Strategies (what\'s working RIGHT NOW)',
@@ -32,6 +34,18 @@ const Upsell1Popup: React.FC<Upsell1PopupProps> = ({
     'The Algorithm Domination Formula (get pushed by Instagram)',
     'Content Velocity System (grow faster with less effort)',
   ];
+
+  const handleAccept = () => {
+    setIsLoading(true);
+    // Redirect to CopeCart checkout for Upsell 1 (197€ Cinematic Studio Growth System)
+    const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?upsell=1&price=197";
+    window.location.href = copeCartUrl;
+  };
+
+  const handleDecline = () => {
+    setIsLoading(true);
+    onDecline(); // This will navigate to upsell-2-page
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -117,17 +131,19 @@ const Upsell1Popup: React.FC<Upsell1PopupProps> = ({
 
         <DialogFooter className="flex flex-col gap-4 mt-6">
           <Button 
-            className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white text-sm md:text-base font-bold py-3 transition-all duration-300" 
-            onClick={onAccept}
+            className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-70 disabled:cursor-not-allowed text-white text-sm md:text-base font-bold py-3 transition-all duration-300" 
+            onClick={handleAccept}
+            disabled={isLoading}
           >
-            🔓 YES, Add The Growth System To My Order Now!
+            {isLoading ? "🔄 PROCESSING..." : "🔓 YES, Add The Growth System To My Order Now!"}
           </Button>
           <Button 
             variant="secondary" 
-            className="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-600 text-sm font-semibold py-2 transition-all duration-300" 
-            onClick={onDecline}
+            className="w-full bg-slate-800 hover:bg-slate-700 disabled:opacity-70 disabled:cursor-not-allowed text-slate-300 hover:text-white border border-slate-600 text-sm font-semibold py-2 transition-all duration-300" 
+            onClick={handleDecline}
+            disabled={isLoading}
           >
-            NO, I'll Stay Where I Am
+            {isLoading ? "PROCESSING..." : "NO, I'll Stay Where I Am"}
           </Button>
         </DialogFooter>
 

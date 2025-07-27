@@ -12,6 +12,7 @@ const Downsell2Page = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [timeLeft, setTimeLeft] = useState(5 * 60); // 5 minutes in seconds
     const [isTimerActive, setIsTimerActive] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     // Prevent body scroll when popup is open
@@ -47,7 +48,7 @@ const Downsell2Page = () => {
                     setIsTimerActive(false);
                     // Small delay before redirect to ensure state updates
                     setTimeout(() => {
-                        router.push('/thank-you-page');
+                        router.push('/thank-you');
                     }, 100);
                     return 0;
                 }
@@ -73,25 +74,76 @@ const Downsell2Page = () => {
     };
 
     const handleAcceptFull = () => {
+        setIsLoading(true);
         // Stop timer when user accepts
         setIsTimerActive(false);
-        setShowPopup(false);
-        // Handle full payment - redirect to CopeCart or checkout
-        window.location.href = '/checkout-downsell-full'; // €197 full payment
+        // CopeCart checkout for Downsell 2 - Full Payment (€197)
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=2&price=197&product=studio-pro-full";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart:", error);
+            setIsLoading(false);
+        }
     };
 
     const handleAcceptPlan = () => {
+        setIsLoading(true);
+        // Stop timer when user accepts
+        setIsTimerActive(false);
+        // CopeCart checkout for Downsell 2 - Payment Plan (3x €97)
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=2&price=97&product=studio-pro-plan&plan=3x97";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart:", error);
+            setIsLoading(false);
+        }
+    };
+
+    const handlePopupAcceptFull = () => {
+        setIsLoading(true);
         // Stop timer when user accepts
         setIsTimerActive(false);
         setShowPopup(false);
-        // Handle payment plan - redirect to CopeCart or checkout
-        window.location.href = '/checkout-downsell-plan'; // 3x €97 payment plan
+        // CopeCart checkout from popup - Full Payment
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=2&price=197&product=studio-pro-full&source=popup";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart from popup:", error);
+            setIsLoading(false);
+        }
+    };
+
+    const handlePopupAcceptPlan = () => {
+        setIsLoading(true);
+        // Stop timer when user accepts
+        setIsTimerActive(false);
+        setShowPopup(false);
+        // CopeCart checkout from popup - Payment Plan
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=2&price=97&product=studio-pro-plan&plan=3x97&source=popup";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart from popup:", error);
+            setIsLoading(false);
+        }
+    };
+
+    const handlePopupDecline = () => {
+        setShowPopup(false);
+        // Redirect to thank-you page for final decline
+        router.push('/thank-you');
     };
 
     const handleFinalDecline = () => {
         setIsTimerActive(false);
-        setShowPopup(false);
-        router.push('/thank-you-page');
+        router.push('/thank-you');
     };
 
     return (
@@ -118,7 +170,7 @@ const Downsell2Page = () => {
                 {/* Content Section */}
                 <Downsell2ContentSection />
 
-                {/* Timer Section - Fixed positioning and z-index issues */}
+                {/* Timer Section */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -151,7 +203,7 @@ const Downsell2Page = () => {
                     )}
                 </motion.div>
 
-                {/* Final CTA Section - Fixed button interactions and mobile responsiveness */}
+                {/* Final CTA Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -163,43 +215,47 @@ const Downsell2Page = () => {
                     </h3>
 
                     <div className="space-y-6 max-w-lg mx-auto px-4">
-                        {/* Full Payment Button - Fixed click handling */}
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={handleAcceptFull}
-                            disabled={timeLeft <= 0}
-                            className="relative group w-full overflow-hidden rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        {/* Full Payment Button */}
+                        <motion.div
+                            whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                            whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                            className="relative group inline-block w-full"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 opacity-75 group-hover:opacity-100 transition duration-200" />
-                            <div className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-sm sm:text-base lg:text-xl py-3 sm:py-4 px-4 sm:px-6 lg:px-12 transition-colors duration-300 border border-green-500/50 rounded-lg">
-                                ✅ YES - Give Me The System for €197!
-                            </div>
-                        </motion.button>
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <button
+                                onClick={handleAcceptFull}
+                                disabled={timeLeft <= 0 || isLoading}
+                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base lg:text-xl py-3 sm:py-4 px-4 sm:px-6 lg:px-12 rounded-lg transition-colors duration-300 border border-green-500/50 w-full"
+                            >
+                                ✅ {isLoading ? "PROCESSING PAYMENT..." : "YES - Give Me The System for €197!"}
+                            </button>
+                        </motion.div>
                         
                         <p className="text-sm md:text-base lg:text-lg text-green-400 font-semibold">
                             Finally. Let's turn your content into cash.
                         </p>
 
-                        {/* Payment Plan Button - Fixed click handling */}
-                        <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={handleAcceptPlan}
-                            disabled={timeLeft <= 0}
-                            className="relative group w-full overflow-hidden rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        {/* Payment Plan Button */}
+                        <motion.div
+                            whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                            whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                            className="relative group inline-block w-full"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 opacity-75 group-hover:opacity-100 transition duration-200" />
-                            <div className="relative z-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm sm:text-base lg:text-lg py-3 px-4 sm:px-6 lg:px-12 transition-colors duration-300 border border-blue-500/50 rounded-lg">
-                                💳 PAYMENT PLAN: 3x €97
-                            </div>
-                        </motion.button>
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
+                            <button
+                                onClick={handleAcceptPlan}
+                                disabled={timeLeft <= 0 || isLoading}
+                                className="relative z-10 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base lg:text-lg py-3 px-4 sm:px-6 lg:px-12 rounded-lg transition-colors duration-300 border border-blue-500/50 w-full"
+                            >
+                                💳 {isLoading ? "PROCESSING PAYMENT..." : "PAYMENT PLAN: 3x €97"}
+                            </button>
+                        </motion.div>
                         
                         <p className="text-sm md:text-base lg:text-lg text-blue-400 font-semibold">
                             Same access. Easier on your budget.
                         </p>
 
-                        {/* Scarcity + Decline - Fixed spacing and responsive text */}
+                        {/* Scarcity + Decline */}
                         <div className="mt-8 space-y-4">
                             <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-orange-400 text-center">
                                 <Clock className="w-4 h-4 flex-shrink-0" />
@@ -208,8 +264,8 @@ const Downsell2Page = () => {
 
                             <button
                                 onClick={handleDecline}
-                                disabled={timeLeft <= 0}
-                                className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled={timeLeft <= 0 || isLoading}
+                                className="block mx-auto text-red-400 hover:text-red-500 disabled:opacity-50 disabled:cursor-not-allowed underline text-sm transition-colors duration-300"
                             >
                                 ❌ No, I Choose to Stay Broke
                             </button>
@@ -221,7 +277,7 @@ const Downsell2Page = () => {
                     </div>
                 </motion.div>
 
-                {/* P.S. Section - Improved mobile spacing */}
+                {/* P.S. Section */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -244,9 +300,9 @@ const Downsell2Page = () => {
                 <Downsell2Popup
                     isOpen={showPopup}
                     onClose={handleClosePopup}
-                    onAcceptFull={handleAcceptFull}
-                    onAcceptPlan={handleAcceptPlan}
-                    onDecline={handleFinalDecline}
+                    onAcceptFull={handlePopupAcceptFull}
+                    onAcceptPlan={handlePopupAcceptPlan}
+                    onDecline={handlePopupDecline}
                 />
             )}
         </div>

@@ -10,6 +10,7 @@ import Downsell1Popup from '@/components/downsell/DownsellPopup';
 
 const Downsell1Page = () => {
     const [showPopup, setShowPopup] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     const handleDecline = () => {
@@ -17,8 +18,16 @@ const Downsell1Page = () => {
     };
 
     const handleAccept = () => {
-        // Handle upgrade to VIP at downsell price - redirect to CopeCart or next step
-        window.location.href = '/upsell-2'; // Or CopeCart downsell URL
+        setIsLoading(true);
+        // CopeCart checkout for Downsell 1 - Growth System (€97)
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=1&price=97&product=growth-system";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart:", error);
+            setIsLoading(false);
+        }
     };
 
     const handleClosePopup = () => {
@@ -26,13 +35,27 @@ const Downsell1Page = () => {
     };
 
     const handlePopupAccept = () => {
-        setShowPopup(false);
-        window.location.href = '/upsell-2'; // Or CopeCart downsell URL
+        setIsLoading(true);
+        // CopeCart checkout from popup
+        const copeCartUrl = "https://copecart.com/products/c6f1ba46/checkout?downsell=1&price=97&product=growth-system&source=popup";
+        
+        try {
+            window.location.href = copeCartUrl;
+        } catch (error) {
+            console.error("Error redirecting to CopeCart from popup:", error);
+            setIsLoading(false);
+        }
     };
 
     const handlePopupDecline = () => {
         setShowPopup(false);
-        router.push('/thank-you'); // Or wherever declined users should go
+        // Redirect to downsell-2-page for next offer
+        router.push('/downsell-2-page');
+    };
+
+    const handleFinalDecline = () => {
+        // Direct decline - go to downsell-2-page
+        router.push('/downsell-2-page');
     };
 
     return (
@@ -75,16 +98,17 @@ const Downsell1Page = () => {
 
                     <div className="space-y-4 md:space-y-5">
                         <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
+                            whileHover={{ scale: isLoading ? 1 : 1.05 }}
+                            whileTap={{ scale: isLoading ? 1 : 0.98 }}
                             className="relative group inline-block"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-200 z-0" />
                             <button
                                 onClick={handleAccept}
-                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
+                                disabled={isLoading}
+                                className="relative z-10 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold text-lg md:text-xl px-8 md:px-12 py-4 rounded-lg transition-colors duration-300 inline-flex items-center gap-3 border border-green-500/50"
                             >
-                                ✅ YES - Give me the growth system behind 1.000.000 followers for 97€
+                                ✅ {isLoading ? "PROCESSING PAYMENT..." : "YES - Give me the growth system behind 1.000.000 followers for 97€"}
                             </button>
                         </motion.div>
 
@@ -94,14 +118,14 @@ const Downsell1Page = () => {
 
                         <button
                             onClick={handleDecline}
-                            className="block mx-auto text-red-400 hover:text-red-500 underline text-sm transition-colors duration-300 mt-6"
+                            disabled={isLoading}
+                            className="block mx-auto text-red-400 hover:text-red-500 disabled:opacity-50 disabled:cursor-not-allowed underline text-sm transition-colors duration-300 mt-6"
                         >
                             ❌ No Thanks - I'll Pass on This Final Offer
                         </button>
 
                         <div className="flex items-center justify-center gap-2 text-sm text-red-400 mt-6">
-                            <span>I understand. But remember - this chance won't come again.
-                            </span>
+                            <span>I understand. But remember - this chance won't come again.</span>
                         </div>
                     </div>
                 </motion.div>
