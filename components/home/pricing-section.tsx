@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRandomPricing } from "@/hooks/useRandomPricing";
 import InlineTimer from "./countdown/inline-timer";
 
 // Register ScrollTrigger plugin
@@ -35,6 +36,7 @@ const features = [
 
 export default function PricingSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const { currentPricing, handleRandomCheckout } = useRandomPricing();
 
   useEffect(() => {
     // Skip GSAP initialization during SSR
@@ -81,18 +83,10 @@ export default function PricingSection() {
     >
       <div className="absolute inset-0 bg-noise"></div>
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple/10 rounded-full blur-3xl"></div>
-      {/* <div className="absolute bottom-0 left-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl"></div> */}
 
       <div className="container px-4 md:px-6 relative z-10">
-        {/* Timer Component - Above Badge */}
-        {/* <div className="mb-6 -mt-16 md:-mt-24">
-          <InlineTimer />
-        </div> */}
         <div className="text-center mb-16">
-          {/* <h2 className="pricing-titletext-3xl md:text-4xl lg:text-5xl font-bold tracking-tight uppercase text-white">
-             Value Stack <span className="text-gradient">&</span> Offer
-          </h2> */}
-          <p className="mt-4 text-xl text-purple font-bold">NOW ONLY €127</p>
+          <p className="mt-4 text-xl text-purple font-bold">SPECIAL OFFER</p>
           <p className="mt-2 text-muted-foreground">
             UNLOCK LIFETIME ACCESS NOW
           </p>
@@ -118,7 +112,7 @@ export default function PricingSection() {
                   <p className="text-sm text-muted-foreground">
                     One-Time Payment
                   </p>
-                  <p className="text-3xl font-bold text-purple">€127</p>
+                  <p className="text-3xl font-bold text-purple">SPECIAL PRICE</p>
                 </div>
               </div>
 
@@ -142,17 +136,13 @@ export default function PricingSection() {
                   className="relative group"
                 >
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-500 rounded-md blur opacity-75 group-hover:opacity-100 transition duration-200"></div>
-                  <a
-                    href="https://copecart.com/products/c6f1ba46/checkout"
-                    target="_blank"
+                  <Button
+                    size="lg"
+                    className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white font-bold px-8 py-6 border border-blue-700/50"
+                    onClick={handleRandomCheckout}
                   >
-                    <Button
-                      size="lg"
-                      className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white font-bold px-8 py-6 border border-blue-700/50"
-                    >
-                      JOIN CINEMATIC STUDIO NOW - €127
-                    </Button>
-                  </a>
+                    JOIN CINEMATIC STUDIO NOW
+                  </Button>
                 </motion.div>
               </div>
               <p className="text-sm text-center text-muted-foreground mt-2">

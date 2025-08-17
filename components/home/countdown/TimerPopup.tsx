@@ -107,8 +107,8 @@ export default function TimerPopup() {
                             {/* Price */}
                             <div className="mb-6">
                                 <div className="flex items-center justify-center">
-                                    <span className="text-4xl font-bold text-white">€127</span>
-                                    <span className="ml-2 text-lg line-through text-gray-400">€147</span>
+                                    {/* <span className="text-4xl font-bold text-white">€127</span> */}
+                                    {/* <span className="ml-2 text-lg line-through text-gray-400">€147</span> */}
                                 </div>
                                 <p className="text-xs text-gray-400 mt-1">Lifetime access - Price increases permanently after offer ends</p>
                             </div>

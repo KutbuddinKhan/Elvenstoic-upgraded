@@ -61,7 +61,7 @@ export default function AnnouncementBar({ className = "" }: AnnouncementBarProps
                                     {daysLeft === 0 ? "FINAL HOURS!" : `${daysLeft} DAY LEFT!`}
                                 </span>
                                 <span className="font-bold text-white text-sm">Cinematic Studio</span>
-                                <span className="font-bold text-yellow-400 text-sm">€127</span>
+                                {/* <span className="font-bold text-yellow-400 text-sm">€127</span> */}
                             </div>
                             
                             {/* Desktop version (full content) */}
@@ -77,8 +77,8 @@ export default function AnnouncementBar({ className = "" }: AnnouncementBarProps
                                 <span className="font-medium"> Upgraded </span>
                                 <span className="font-bold text-yellow-400">Cinematic Studio</span>
                                 <span className="font-medium"> lifetime access for </span>
-                                <span className="font-bold text-yellow-400">€127</span>
-                                <span className="font-medium text-gray-300 line-through ml-1">€147</span>
+                                {/* <span className="font-bold text-yellow-400">€127</span> */}
+                                {/* <span className="font-medium text-gray-300 line-through ml-1">€147</span> */}
                             </div>
                             
                             <a href="https://copecart.com/products/c6f1ba46/checkout" target="_blank" className="flex items-center text-xs font-bold bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-2 sm:px-3 py-1 rounded-full transition-all group-hover:scale-105">
