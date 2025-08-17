@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 
 interface PricingOption {
   price: number;
@@ -10,31 +10,36 @@ const PRICING_OPTIONS: PricingOption[] = [
   {
     price: 17,
     url: "https://copecart.com/products/3c9b0222/checkout",
-    weight: 50 // 50% chance
+    weight: 33.33,
   },
   {
     price: 67,
     url: "https://copecart.com/products/687aef3a/checkout",
-    weight: 30 // 30% chance
+    weight: 33.33,
   },
   {
     price: 147,
     url: "https://copecart.com/products/1f010ed4/checkout",
-    weight: 20 // 20% chance
-  }
+    weight: 33.34, // ~33.34% chance (slightly higher to total 100%)
+  },
 ];
 
 export const useRandomPricing = () => {
-  const [currentPricing, setCurrentPricing] = useState<PricingOption>(PRICING_OPTIONS[2]); // Default to $147
+  const [currentPricing, setCurrentPricing] = useState<PricingOption>(
+    PRICING_OPTIONS[0]
+  ); // Default to first option
 
   // Function to get weighted random pricing option
   const getRandomPricing = useCallback((): PricingOption => {
     // Calculate total weight
-    const totalWeight = PRICING_OPTIONS.reduce((sum, option) => sum + option.weight, 0);
-    
+    const totalWeight = PRICING_OPTIONS.reduce(
+      (sum, option) => sum + option.weight,
+      0
+    );
+
     // Generate random number between 0 and totalWeight
     let random = Math.random() * totalWeight;
-    
+
     // Find the option based on weighted probability
     for (const option of PRICING_OPTIONS) {
       random -= option.weight;
@@ -42,7 +47,7 @@ export const useRandomPricing = () => {
         return option;
       }
     }
-    
+
     // Fallback to first option (shouldn't reach here)
     return PRICING_OPTIONS[0];
   }, []);
@@ -57,7 +62,7 @@ export const useRandomPricing = () => {
   // Function to handle checkout with random pricing
   const handleRandomCheckout = useCallback(() => {
     const selectedPricing = selectRandomPricing();
-    window.open(selectedPricing.url, '_blank', 'noopener,noreferrer');
+    window.open(selectedPricing.url, "_blank", "noopener,noreferrer");
     return selectedPricing;
   }, [selectRandomPricing]);
 
@@ -70,7 +75,6 @@ export const useRandomPricing = () => {
     currentPricing,
     selectRandomPricing,
     handleRandomCheckout,
-    allPricingOptions: PRICING_OPTIONS
+    allPricingOptions: PRICING_OPTIONS,
   };
 };
-

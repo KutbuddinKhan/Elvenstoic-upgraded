@@ -239,7 +239,7 @@ export default function HeroSection() {
                   className="relative bg-gradient-to-r from-blue-800 to-blue-600 text-white font-bold px-8 py-6 border border-blue-700/50"
                   onClick={handleRandomCheckout}
                 >
-                  Join Before the Price Increases →
+                   Get Access Now →
                 </Button>
               </a>
             </motion.div>
